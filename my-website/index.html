@@ -13,7 +13,46 @@
 
 <body>
   <div class="navbar">
-    <img src="logo.png" alt="LOGO HERE" />
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chillflix</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #00ffff;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .logo {
+      font-size: 5rem;
+      letter-spacing: 5px;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      color: #ccc;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="logo">CHILLFLIX</div>
+    <div class="tagline">Cool Movies. Anytime.</div>
+  </div>
+</body>
+</html>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <input type="text" class="search-bar" placeholder="Search..." onfocus="openSearchModal()" />
@@ -43,7 +82,7 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal()" style="color: red;">&times;</span>
       <div class="modal-body">
-  <img src="images/chillflix-logo.png" alt="Chillflix Logo" width="200">
+  <img id="modal-image" src="" alt="" />
   <div class="modal-text">
     <h2 id="modal-title"></h2>
     <div class="stars" id="modal-rating"></div>
