@@ -1,293 +1,85 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ChillFlix - Stream Movies & TV Shows</title>
-<style>
-  /* Reset */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    background: #0d0d0d;
-    color: #eaeaea;
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  /* Navbar */
-  header {
-    background: #121212;
-    padding: 1rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 12px rgb(0 0 0 / 0.8);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  .logo {
-    font-weight: 900;
-    font-size: 2rem;
-    letter-spacing: 3px;
-    color: #ff2c2c;
-    user-select: none;
-  }
-  nav {
-    display: flex;
-    gap: 2rem;
-  }
-  nav a {
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 0.4rem 0;
-    position: relative;
-    transition: color 0.3s ease;
-  }
-  nav a::after {
-    content: '';
-    position: absolute;
-    left: 0; bottom: -5px;
-    width: 0;
-    height: 3px;
-    background: #ff2c2c;
-    transition: width 0.3s ease;
-    border-radius: 3px;
-  }
-  nav a:hover, nav a:focus {
-    color: #ff2c2c;
-  }
-  nav a:hover::after, nav a:focus::after {
-    width: 100%;
-  }
-
-  /* Hero */
-  .hero {
-    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-    min-height: 480px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 3rem 4rem;
-    box-shadow: inset 0 -120px 150px -80px rgba(0,0,0,0.8);
-  }
-  .hero h1 {
-    font-size: 3.8rem;
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1.5px;
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.85);
-  }
-  .hero p {
-    max-width: 600px;
-    font-size: 1.2rem;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
-    color: #d7d7d7;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
-  }
-  .btn-watch {
-    background-color: #ff2c2c;
-    border: none;
-    padding: 0.9rem 2.2rem;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 8px 16px rgb(255 44 44 / 0.5);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    user-select: none;
-    width: fit-content;
-  }
-  .btn-watch:hover,
-  .btn-watch:focus {
-    background-color: #d11f1f;
-    box-shadow: 0 10px 24px rgb(209 31 31 / 0.7);
-  }
-
-  /* Movies grid */
-  .movies {
-    padding: 3rem 4rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 2rem;
-  }
-  .movie-card {
-    background: #181818;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 0 8px rgb(0 0 0 / 0.8);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    user-select: none;
-  }
-  .movie-card:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 25px #ff2c2c;
-  }
-  .movie-card img {
-    width: 100%;
-    height: 270px;
-    object-fit: cover;
-    transition: filter 0.3s ease;
-  }
-  .movie-card:hover img {
-    filter: brightness(0.85);
-  }
-  .movie-info {
-    padding: 1rem 1.2rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .movie-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 0.4rem;
-    color: #ff2c2c;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .movie-year {
-    font-size: 0.9rem;
-    color: #999;
-    letter-spacing: 1px;
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 1.5rem 0;
-    font-size: 0.9rem;
-    color: #555;
-    background: #121212;
-    user-select: none;
-  }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    .hero {
-      padding: 2rem 2.5rem;
-      min-height: 360px;
-    }
-    .hero h1 {
-      font-size: 2.8rem;
-    }
-    .hero p {
-      font-size: 1rem;
-    }
-    .movies {
-      padding: 2rem 2.5rem;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 1.5rem;
-    }
-    .movie-card img {
-      height: 210px;
-    }
-  }
-  @media (max-width: 480px) {
-    header {
-      padding: 1rem 1.5rem;
-    }
-    nav {
-      gap: 1rem;
-    }
-    .hero {
-      padding: 1.5rem 1.5rem;
-      min-height: 280px;
-    }
-    .hero h1 {
-      font-size: 2rem;
-    }
-    .hero p {
-      font-size: 0.9rem;
-    }
-    .btn-watch {
-      width: 100%;
-      text-align: center;
-      padding: 0.8rem 0;
-      font-size: 1rem;
-    }
-    .movies {
-      padding: 1rem 1.5rem;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 1rem;
-    }
-    .movie-card img {
-      height: 170px;
-    }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Website</title>
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="preload" href="css/home.css" as="style">
+  <link rel="preload" href="js/home.js" as="script">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script defer src="js/home.js"></script>
 </head>
+
 <body>
-
-<header>
-  <div class="logo" tabindex="0">ChillFlix</div>
-  <nav role="navigation" aria-label="Primary Navigation">
-    <a href="#" tabindex="0">Home</a>
-    <a href="#" tabindex="0">Movies</a>
-    <a href="#" tabindex="0">TV Shows</a>
-    <a href="#" tabindex="0">My List</a>
-  </nav>
-</header>
-
-<section class="hero" aria-label="Featured Movie">
-  <h1 tabindex="0">Featured Movie: The Great Adventure</h1>
-  <p tabindex="0">Join the journey in this epic story full of thrills and excitement.</p>
-  <button class="btn-watch" aria-label="Watch The Great Adventure now">Watch Now</button>
-</section>
-
-<section class="movies" aria-label="Movie Gallery">
-  <article class="movie-card" tabindex="0" aria-label="Movie: Wonder Woman 1984, released in 2020">
-    <img src="https://image.tmdb.org/t/p/w300/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="Poster of Wonder Woman 1984" />
-    <div class="movie-info">
-      <div class="movie-title">Wonder Woman 1984</div>
-      <div class="movie-year">2020</div>
+  <div class="navbar">
+    <img src="logo.png" alt="LOGO HERE" />
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <input type="text" class="search-bar" placeholder="Search..." onfocus="openSearchModal()" />
     </div>
-  </article>
+  </div>
 
-  <article class="movie-card" tabindex="0" aria-label="Movie: Inception, released in 2010">
-    <img src="https://image.tmdb.org/t/p/w300/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="Poster of Inception" />
-    <div class="movie-info">
-      <div class="movie-title">Inception</div>
-      <div class="movie-year">2010</div>
+  <div class="banner" id="banner">
+    <h1 id="banner-title"></h1>
+  </div>
+
+  <div class="row">
+    <h2>Trending Movies</h2>
+    <div class="list" id="movies-list"></div>
+  </div>
+
+  <div class="row">
+    <h2>Trending TV Shows</h2>
+    <div class="list" id="tvshows-list"></div>
+  </div>
+
+  <div class="row">
+    <h2>Trending Anime</h2>
+    <div class="list" id="anime-list"></div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()" style="color: red;">&times;</span>
+      <div class="modal-body">
+  <img id="modal-image" src="" alt="" />
+  <div class="modal-text">
+    <h2 id="modal-title"></h2>
+    <div class="stars" id="modal-rating"></div>
+    <p id="modal-description"></p>
+  </div>
+</div>
+      
+      <div class="server-selector">
+        <label for="server">Change Server:</label>
+        <select id="server" onchange="changeServer()">
+          <option value="vidsrc.cc">Vidsrc.cc</option>
+          <option value="vidsrc.me">Vidsrc.me</option>
+          <option value="player.videasy.net">Player.Videasy.net</option>
+        </select>
+      </div>
+      <iframe id="modal-video" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
     </div>
-  </article>
+  </div>
 
-  <article class="movie-card" tabindex="0" aria-label="Movie: The Batman, released in 2022">
-    <img src="https://image.tmdb.org/t/p/w300/6KErczPBROQty7QoIsaa6wJYXZi.jpg" alt="Poster of The Batman" />
-    <div class="movie-info">
-      <div class="movie-title">The Batman</div>
-      <div class="movie-year">2022</div>
+  <div class="search-modal" id="search-modal">
+    <span class="close" onclick="closeSearchModal()" style="color: red;">&times;</span>
+    <input type="text" id="search-input" placeholder="Search for a movie or show..." oninput="searchTMDB()" />
+    <div class="results" id="search-results"></div>
+  </div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Disclaimer</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact Us</a>
     </div>
-  </article>
-
-  <article class="movie-card" tabindex="0" aria-label="Movie: The Shawshank Redemption, released in 1994">
-    <img src="https://image.tmdb.org/t/p/w300/xBKGJQsAIeweesB79KC89FpBrVr.jpg" alt="Poster of The Shawshank Redemption" />
-    <div class="movie-info">
-      <div class="movie-title">The Shawshank Redemption</div>
-      <div class="movie-year">1994</div>
-    </div>
-  </article>
-</section>
-
-<footer>
-  &copy; 2025 ChillFlix. All rights reserved.
+  </div>
 </footer>
 
+  
 </body>
-</html>
 
