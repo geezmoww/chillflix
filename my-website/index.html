@@ -1,203 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ChillFlix - Watch Movies & Shows</title>
-  <style>
-    /* Reset & base */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: #121212;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    a {
-      color: #fff;
-      text-decoration: none;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ChillFlix - Stream Movies & TV Shows</title>
+<style>
+  /* Reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: #0d0d0d;
+    color: #eaeaea;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-    /* Navbar */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: #1f1f1f;
-      border-bottom: 1px solid #333;
-    }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #f53939;
-      letter-spacing: 2px;
-    }
-    nav a {
-      margin-left: 1.5rem;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #f53939;
-    }
-
-    /* Hero / Featured */
-    .hero {
-      position: relative;
-      background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1350&q=80') no-repeat center/cover;
-      height: 400px;
-      display: flex;
-      align-items: flex-end;
-      padding: 2rem;
-      border-radius: 0 0 15px 15px;
-      box-shadow: inset 0 -80px 80px -40px rgba(0,0,0,0.7);
-    }
-    .hero-content {
-      max-width: 600px;
-    }
-    .hero-content h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
-    }
-    .hero-content p {
-      font-size: 1.1rem;
-      color: #ddd;
-      margin-bottom: 1rem;
-    }
-    .btn-watch {
-      background-color: #f53939;
-      padding: 0.7rem 1.5rem;
-      font-weight: 700;
-      border-radius: 30px;
-      cursor: pointer;
-      border: none;
-      color: white;
-      transition: background-color 0.3s;
-    }
-    .btn-watch:hover {
-      background-color: #d32f2f;
-    }
-
-    /* Movie grid */
-    .movies {
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
-      gap: 1.5rem;
-    }
-    .movie-card {
-      background-color: #222;
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    }
-    .movie-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #f53939;
-    }
-    .movie-card img {
-      width: 100%;
-      display: block;
-    }
-    .movie-info {
-      padding: 0.8rem;
-    }
-    .movie-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-    .movie-year {
-      font-size: 0.85rem;
-      color: #bbb;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: auto;
-      padding: 1rem 2rem;
-      background-color: #1f1f1f;
-      color: #555;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      .movies {
-        grid-template-columns: repeat(auto-fill,minmax(120px,1fr));
-      }
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <div class="logo">ChillFlix</div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Movies</a>
-    <a href="#">TV Shows</a>
-    <a href="#">My List</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <div class="hero-content">
-    <h1>Featured Movie: The Great Adventure</h1>
-    <p>Join the journey in this epic story full of thrills and excitement.</p>
-    <button class="btn-watch">Watch Now</button>
-  </div>
-</section>
-
-<section class="movies">
-  <div class="movie-card">
-    <img src="https://image.tmdb.org/t/p/w300/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="Wonder Woman 1984" />
-    <div class="movie-info">
-      <div class="movie-title">Wonder Woman 1984</div>
-      <div class="movie-year">2020</div>
-    </div>
-  </div>
-  <div class="movie-card">
-    <img src="https://image.tmdb.org/t/p/w300/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="Inception" />
-    <div class="movie-info">
-      <div class="movie-title">Inception</div>
-      <div class="movie-year">2010</div>
-    </div>
-  </div>
-  <div class="movie-card">
-    <img src="https://image.tmdb.org/t/p/w300/6KErczPBROQty7QoIsaa6wJYXZi.jpg" alt="The Batman" />
-    <div class="movie-info">
-      <div class="movie-title">The Batman</div>
-      <div class="movie-year">2022</div>
-    </div>
-  </div>
-  <div class="movie-card">
-    <img src="https://image.tmdb.org/t/p/w300/xBKGJQsAIeweesB79KC89FpBrVr.jpg" alt="The Shawshank Redemption" />
-    <div class="movie-info">
-      <div class="movie-title">The Shawshank Redemption</div>
-      <div class="movie-year">1994</div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  &copy; 2025 ChillFlix. All rights reserved.
-</footer>
-
-</body>
-</html>
+  /* Navbar */
+  header {
+    background: #121212;
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-s
 
