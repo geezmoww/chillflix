@@ -373,5 +373,12 @@ body {
   cursor: pointer;
 }
 
+.logo img {
+  width: 120px;
+  height: auto;
+  max-height: 50px;
+  display: block;
+}
+
 
 
