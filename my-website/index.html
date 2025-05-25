@@ -142,77 +142,51 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: white;
-  border: 2px solid red;
-  color: blue;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #e60000, #0055ff);
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
   padding: 16px;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   z-index: 9999;
-  width: 220px;
+  width: 240px;
+  backdrop-filter: blur(4px);
 ">
-  <div style="font-weight: bold; font-size: 18px; color: red; margin-bottom: 8px;">
-    🔵🔴 ChillFlix Live
+  <div style="
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  ">
+    <span style="color: white;">Chill</span><span style="color: #ffe600;">Flix</span>
+    <span style="font-size: 20px;">🔥</span>
   </div>
-  <div style="margin-bottom: 4px;" id="userCount">Users Online: ...</div>
-  <div id="countryCount">Countries: ...</div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID",
-      databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    function getCountry() {
-      return fetch("https://ipapi.co/json")
-        .then(res => res.json())
-        .then(data => data.country)
-        .catch(() => "Unknown");
-    }
-
-    function updatePresence() {
-      const userId = Math.random().toString(36).substring(2);
-      const userRef = ref(db, 'onlineUsers/' + userId);
-
-      getCountry().then(country => {
-        set(userRef, {
-          country: country,
-          timestamp: Date.now()
-        });
-
-        window.addEventListener("beforeunload", () => {
-          set(userRef, null);
-        });
-      });
-    }
-
-    function listenStats() {
-      const usersRef = ref(db, 'onlineUsers');
-      onValue(usersRef, snapshot => {
-        const users = snapshot.val() || {};
-        const userCount = Object.keys(users).length;
-        const countries = new Set(Object.values(users).map(u => u.country));
-        document.getElementById('userCount').textContent = `Users Online: ${userCount}`;
-        document.getElementById('countryCount').textContent = `Countries: ${countries.size}`;
-      });
-    }
-
-    updatePresence();
-    listenStats();
-  </script>
+  <div style="font-size: 16px; margin-bottom: 6px;" id="userCount">Users Online: 0</div>
+  <div style="font-size: 16px;" id="countryCount">Countries: 0</div>
 </div>
+
+<script>
+  // Simulated data
+  const sampleCountries = ["US", "IN", "UK", "DE", "FR", "BR", "JP", "AU", "CA", "NG"];
+
+  function simulateStats() {
+    const usersOnline = Math.floor(Math.random() * 90) + 10;
+    const countries = new Set();
+    for (let i = 0; i < usersOnline; i++) {
+      countries.add(sampleCountries[Math.floor(Math.random() * sampleCountries.length)]);
+    }
+
+    document.getElementById('userCount').textContent = `Users Online: ${usersOnline}`;
+    document.getElementById('countryCount').textContent = `Countries: ${countries.size}`;
+  }
+
+  simulateStats();
+  setInterval(simulateStats, 5000);
+</script>
 
 </body>
 
