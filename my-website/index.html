@@ -18,6 +18,34 @@
 <script async="async" data-cfasync="false" src="//pl26741459.profitableratecpm.com/1baf9dcb2f371ef2a2caaa97bf82e9bc/invoke.js"></script>
 <div id="container-1baf9dcb2f371ef2a2caaa97bf82e9bc"></div>
 </head>
+<div id="disclaimer" style="
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  max-width: 320px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+">
+  <p style="margin-bottom: 10px;">
+    ⚠️ This website does not host any videos. All content is from third parties. ChillFlix is for informational and entertainment purposes only.
+  </p>
+  <button onclick="dismissDisclaimer()" style="
+    background: #e60000;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+  ">I Understand</button>
+</div>
 
 <body>
   <!-- Navbar -->
@@ -224,25 +252,23 @@
     simulateStats();
     setInterval(simulateStats, 5000);
   });
-</script>
-<div id="disclaimer" class="disclaimer-popup">
-  <div class="disclaimer-content">
-    <h2>Disclaimer</h2>
-    <p>This website does not host any videos on its own servers. All content is provided by non-affiliated third parties. ChillFlix is intended for informational and entertainment purposes only.</p>
-    <button onclick="dismissDisclaimer()">I Understand</button>
-  </div>
-</div>
 <script>
-  <script>
   function dismissDisclaimer() {
-    document.getElementById("disclaimer").style.display = "none";
-    localStorage.setItem("disclaimerAccepted", "true");
+    const box = document.getElementById("disclaimer");
+    box.style.opacity = "0";
+    setTimeout(() => {
+      box.style.display = "none";
+      localStorage.setItem("disclaimerAccepted", "true");
+    }, 300); // wait for fade-out
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     const disclaimerAccepted = localStorage.getItem("disclaimerAccepted");
     if (!disclaimerAccepted) {
-      document.getElementById("disclaimer").style.display = "flex";
+      const box = document.getElementById("disclaimer");
+      box.style.display = "block";
+      box.style.transition = "opacity 0.3s ease";
+      box.style.opacity = "1";
     }
   });
 </script>
