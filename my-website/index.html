@@ -149,9 +149,10 @@
   padding: 16px;
   font-family: 'Segoe UI', sans-serif;
   z-index: 9999;
-  width: 240px;
+  width: 260px;
   backdrop-filter: blur(4px);
 ">
+  <!-- Logo -->
   <div style="
     font-weight: bold;
     font-size: 22px;
@@ -165,12 +166,20 @@
     <span style="color: #0055ff;">Chill</span><span style="color: #e60000;">Flix</span>
     <span style="font-size: 20px;">🔥</span>
   </div>
-  <div style="font-size: 16px; margin-bottom: 6px;" id="userCount">Users Online: 0</div>
-  <div style="font-size: 16px;" id="countryCount">Countries: 0</div>
+
+  <!-- Stats -->
+  <div style="font-size: 16px; margin-bottom: 8px; display: flex; align-items: center;">
+    <span style="margin-right: 8px;">👤</span>
+    <span id="userCount">Users Online: 0</span>
+  </div>
+
+  <div style="font-size: 16px; display: flex; align-items: center;">
+    <span style="margin-right: 8px;">🌍</span>
+    <span id="countryCount">Countries: 0</span>
+  </div>
 </div>
 
 <script>
-  // Simulated data
   const sampleCountries = ["US", "IN", "UK", "DE", "FR", "BR", "JP", "AU", "CA", "NG"];
 
   function simulateStats() {
