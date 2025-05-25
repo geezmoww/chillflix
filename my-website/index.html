@@ -3,107 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ChillFlix Real-Time Visitors</title>
+  <title>ChillFlix - Your Movie Hub</title>
+
+  <!-- Preload CSS and JS for performance -->
+  <link rel="preload" href="css/home.css" as="style" />
+  <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <style>
-    #visitor-stats-box {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #ff1e56, #1e90ff);
-      color: #fff;
-      padding: 16px 20px;
-      border-radius: 16px;
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 14px;
-      box-shadow: 0 0 16px rgba(255, 0, 70, 0.6), 0 0 16px rgba(30, 144, 255, 0.6);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      animation: pulse 2s infinite;
-    }
-    #visitor-stats-box img {
-      border-radius: 8px;
-      width: 30px;
-      height: 30px;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 16px rgba(255, 0, 70, 0.5), 0 0 16px rgba(30, 144, 255, 0.5); }
-      50% { box-shadow: 0 0 24px rgba(255, 0, 70, 0.8), 0 0 24px rgba(30, 144, 255, 0.8); }
-      100% { box-shadow: 0 0 16px rgba(255, 0, 70, 0.5), 0 0 16px rgba(30, 144, 255, 0.5); }
-    }
-  </style>
+  
+  <link rel="manifest" href="manifest.json" />
+  
+  <link rel="preload" href="js/home.js" as="script" />
+  <script defer src="js/home.js"></script>
+<script type='text/javascript' src='//pl26741312.profitableratecpm.com/05/c2/5a/05c25a7b0141bfad1daacbd4261dc066.js'></script>
+<script async="async" data-cfasync="false" src="//pl26741459.profitableratecpm.com/1baf9dcb2f371ef2a2caaa97bf82e9bc/invoke.js"></script>
+<div id="container-1baf9dcb2f371ef2a2caaa97bf82e9bc"></div>
 </head>
+
 <body>
+  <!-- Navbar -->
+  <header class="navbar" role="banner">
+    <a href="index.html" class="logo" aria-label="ChillFlix Home">
+      <img src="chillflix-logo.png" alt="ChillFlix Logo" width="100" height="40" />
+    </a>
+    <nav class="nav-links" role="navigation" aria-label="Main Navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <input
+        type="search"
+        class="search-bar"
+        placeholder="Search..."
+        aria-label="Search movies and shows"
+        onfocus="openSearchModal()"
+      />
+    </nav>
+  </header>
 
-  <!-- Visitor Box -->
-  <div id="visitor-stats-box">
-    <img src="chillflix-logo.png" alt="ChillFlix Logo" />
-    <div id="visitor-stats">Detecting your country...</div>
-  </div>
+  <!-- Banner -->
+  <section class="banner" id="banner" role="region" aria-live="polite">
+    <h1 id="banner-title"></h1>
+  </section>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
+  <!-- Trending Rows -->
+  <main role="main">
+    <section class="row" aria-labelledby="movies-heading">
+      <h2 id="movies-heading">Trending Movies</h2>
+      <div class="list" id="movies-list" role="list" aria-label="Trending Movies"></div>
+    </section>
 
-  <script>
-    // Your Firebase config (replace with your actual config)
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID",
-      measurementId: "YOUR_MEASUREMENT_ID"
-    };
+    <section class="row" aria-labelledby="tvshows-heading">
+      <h2 id="tvshows-heading">Trending TV Shows</h2>
+      <div class="list" id="tvshows-list" role="list" aria-label="Trending TV Shows"></div>
+    </section>
 
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    <section class="row" aria-labelledby="anime-heading">
+      <h2 id="anime-heading">Trending Anime</h2>
+      <div class="list" id="anime-list" role="list" aria-label="Trending Anime"></div>
+    </section>
+  </main>
 
-    // Detect user country and track user in Firebase
-    fetch('https://ipapi.co/json/')
-      .then(res => res.json())
-      .then(data => {
-        const country = data.country_name || 'Unknown';
-        const userRef = db.ref("activeUsers").push();
+  <!-- Modal -->
+  <aside
+    class="modal"
+    id="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
+    hidden
+  >
+    <div class="modal-content">
+      <button class="close" aria-label="Close modal" onclick="closeModal()" style="color: red;">
+        &times;
+      </button>
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="" />
+        <div class="modal-text">
+          <h2 id="modal-title"></h2>
+          <div class="stars" id="modal-rating" aria-label="Rating"></div>
+          <p id="modal-description"></p>
+        </div>
+      </div>
 
-        // Add current user with country and timestamp
-        userRef.set({
-          country: country,
-          timestamp: Date.now()
-        });
+      <div class="server-selector">
+        <label for="server">Change Server:</label>
+        <select id="server" onchange="changeServer()" aria-controls="modal-video">
+          <option value="vidsrc.cc">Vidsrc.cc</option>
+          <option value="vidsrc.me">Vidsrc.me</option>
+          <option value="player.videasy.net">Player.Videasy.net</option>
+        </select>
+      </div>
 
-        // Remove user from DB on disconnect
-        userRef.onDisconnect().remove();
+      <iframe
+        id="modal-video"
+        width="100%"
+        height="315"
+        frameborder="0"
+        allowfullscreen
+        title="Video Player"
+      ></iframe>
+    </div>
+  </aside>
 
-        // Listen to all active users data
-        db.ref("activeUsers").on("value", snapshot => {
-          const users = snapshot.val();
-          const totalUsers = users ? Object.keys(users).length : 0;
-          const countriesSet = new Set();
+  <!-- Search Modal -->
+  <aside
+    class="search-modal"
+    id="search-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="search-label"
+    hidden
+  >
+    <button class="close" aria-label="Close search modal" onclick="closeSearchModal()" style="color: red;">
+      &times;
+    </button>
+    <label for="search-input" id="search-label" class="visually-hidden">Search for a movie or show</label>
+    <input
+      type="search"
+      id="search-input"
+      placeholder="Search for a movie or show..."
+      oninput="searchTMDB()"
+      aria-describedby="search-results"
+    />
+    <div class="results" id="search-results" role="list"></div>
+  </aside>
 
-          for (const key in users) {
-            if (users[key].country) {
-              countriesSet.add(users[key].country);
-            }
-          }
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <p>&copy; 2025 ChillFlix. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="#" class="footer-link">Disclaimer</a>
+        <a href="#" class="footer-link">About Us</a>
+        <a href="#" class="footer-link">Contact Us</a>
+      </nav>
+    </div>
+  </footer>
 
-          document.getElementById('visitor-stats').innerHTML = `
-            👤 <strong>You</strong> are from <strong>${country}</strong><br>
-            🧑 <strong>${totalUsers}</strong> user${totalUsers !== 1 ? 's' : ''} online<br>
-            🌍 From <strong>${countriesSet.size}</strong> countr${countriesSet.size !== 1 ? 'ies' : 'y'}
-          `;
-        });
-      })
-      .catch(() => {
-        document.getElementById('visitor-stats').textContent = "Could not detect your country.";
-      });
-  </script>
 </body>
-</html>
-
+<!-- 🌍 ChillFlix Visitor Info Box -->
+<div id="visitor-stats-box" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #ff1e56, #1e90ff);
+  color: #fff;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 0 16px rgba(255, 0, 70, 0.6), 0 0 16px rgba(30, 144, 255,
 
 
