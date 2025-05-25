@@ -35,6 +35,23 @@
         onfocus="openSearchModal()"
       />
     </nav>
+<nav class="nav-links" role="navigation" aria-label="Main Navigation">
+  <a href="index.html" class="nav-link">Home</a>
+  <input
+    type="search"
+    class="search-bar"
+    placeholder="Search..."
+    aria-label="Search movies and shows"
+    onfocus="openSearchModal()"
+  />
+  <!-- Genre selector dropdown -->
+  <select id="genre-select" aria-label="Select genre" onchange="goToGenre()">
+    <option value="">Select Genre</option>
+    <option value="movies-heading">Movies</option>
+    <option value="tvshows-heading">TV Shows</option>
+    <option value="anime-heading">Anime</option>
+  </select>
+</nav>
   </header>
 
   <!-- Banner -->
