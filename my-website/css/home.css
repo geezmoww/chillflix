@@ -397,69 +397,6 @@ body {
   cursor: grab;
 }
 
-.list:active {
-  cursor: grabbing;
-}
-
-.list > * {
-  flex: 0 0 auto;
-  width: 140px; /* Adjust based on your card style */
-  transition: transform 0.3s ease;
-}
-
-.tracker-widget {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: #111;
-  color: white;
-  padding: 10px;
-  border-radius: 12px;
-  width: 220px;
-  font-size: 14px;
-  box-shadow: 0 0 10px #00bfff;
-  z-index: 999;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.tracker-widget .header {
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.region-flag {
-  width: 16px;
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
-.tracker-widget {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: #111;
-  color: white;
-  padding: 10px;
-  border-radius: 12px;
-  width: 220px;
-  font-size: 14px;
-  box-shadow: 0 0 10px #00bfff;
-  z-index: 999;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.tracker-widget .header {
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.region-flag {
-  width: 16px;
-  vertical-align: middle;
-  margin-right: 5px;
-}
 
 
 
