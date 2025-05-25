@@ -139,27 +139,61 @@
   </footer>
 
 </body>
-<div id="user-info" style="padding: 10px; background: #111; color: #0f0; font-family: monospace;">
-  Loading visitor info...
+<!-- 🌍 ChillFlix Visitor Info Box -->
+<div id="visitor-stats-box" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #ff1e56, #1e90ff);
+  color: #fff;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 0 16px rgba(255, 0, 70, 0.6), 0 0 16px rgba(30, 144, 255, 0.6);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: pulse 2s infinite;
+">
+  <img src="chillflix-logo.png" alt="ChillFlix Logo" width="30" height="30" style="border-radius: 8px;" />
+  <div id="visitor-stats">
+    Detecting your country...
+  </div>
 </div>
 
-<script>
-  // Fetch user's country
-  fetch('https://ipapi.co/json/')
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('user-info').innerHTML = `
-        🌍 You are visiting from <strong>${data.country_name}</strong><br>
-        🧑 Active users: <span id="live-users">...</span>
-      `;
-    });
+<!-- 🔤 Font Awesome (for icons, if needed) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  // Simulated active users count
-  let activeUsers = Math.floor(Math.random() * 10) + 1;
-  setInterval(() => {
-    document.getElementById('live-users').innerText = activeUsers;
-  }, 1000);
+<!-- 🌐 Visitor Country + Simulated Users Script -->
+<script>
+  fetch('https://ipapi.co/json/')
+    .then(response => response.json())
+    .then(data => {
+      const userCountry = data.country_name || "Unknown";
+      const activeUsers = Math.floor(Math.random() * 50) + 5;
+      const activeCountries = Math.floor(activeUsers / 4) + 1;
+
+      document.getElementById('visitor-stats').innerHTML = `
+        👤 <strong>You</strong> are from <strong>${userCountry}</strong><br>
+        🧑 <strong>${activeUsers}</strong> user${activeUsers !== 1 ? 's' : ''} online<br>
+        🌍 From <strong>${activeCountries}</strong> countr${activeCountries === 1 ? 'y' : 'ies'}
+      `;
+    })
+    .catch(() => {
+      document.getElementById('visitor-stats').textContent = "Could not detect your country.";
+    });
 </script>
+
+<!-- ✨ Optional Animation (glow pulse) -->
+<style>
+@keyframes pulse {
+  0% { box-shadow: 0 0 16px rgba(255, 0, 70, 0.5), 0 0 16px rgba(30, 144, 255, 0.5); }
+  50% { box-shadow: 0 0 24px rgba(255, 0, 70, 0.8), 0 0 24px rgba(30, 144, 255, 0.8); }
+  100% { box-shadow: 0 0 16px rgba(255, 0, 70, 0.5), 0 0 16px rgba(30, 144, 255, 0.5); }
+}
+</style>
 
 </body>
 </html>
