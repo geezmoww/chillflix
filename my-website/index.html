@@ -137,89 +137,43 @@
       </nav>
     </div>
   </footer>
-<!-- Small Floating Widget -->
+<!-- Smaller Floating Widget -->
 <div id="floating-widget" style="
   position: fixed;
   bottom: 16px;
   right: 16px;
   background: linear-gradient(135deg, #e60000, #0055ff);
   color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 6px 10px;
   font-family: 'Segoe UI', sans-serif;
   z-index: 9999;
-  width: 180px;
-  font-size: 13px;
+  width: 140px;
+  font-size: 11px;
+  line-height: 1.2;
+  user-select: none;
+  cursor: default;
 ">
-  <!-- ChillFlix Logo -->
   <div style="
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    white-space: nowrap;
   ">
     <span style="color: #0055ff;">Chill</span><span style="color: #e60000;">Flix</span> 🔥
   </div>
 
-  <!-- Stats -->
-  <div style="display: flex; align-items: center; margin-bottom: 4px;">
-    <span style="margin-right: 6px;">👤</span>
+  <div style="display: flex; align-items: center; margin-bottom: 2px;">
+    <span style="margin-right: 4px;">👤</span>
     <span id="userCount">0 Users</span>
   </div>
 
   <div style="display: flex; align-items: center;">
-    <span style="margin-right: 6px;">🌍</span>
+    <span style="margin-right: 4px;">🌍</span>
     <span id="countryCount">0 Countries</span>
   </div>
-</div>
-
-<script>
-  const sampleCountries = ["US", "IN", "UK", "DE", "FR", "BR", "JP", "AU", "CA", "NG"];
-
-  function simulateStats() {
-    const usersOnline = Math.floor(Math.random() * 90) + 10;
-    const countries = new Set();
-    for (let i = 0; i < usersOnline; i++) {
-      countries.add(sampleCountries[Math.floor(Math.random() * sampleCountries.length)]);
-    }
-
-    document.getElementById('userCount').textContent = `${usersOnline} Users`;
-    document.getElementById('countryCount').textContent = `${countries.size} Countries`;
-  }
-
-  simulateStats();
-  setInterval(simulateStats, 5000);
-</script>
-<!-- Reminder Message -->
-<div id="reminder-box" style="
-  position: fixed;
-  bottom: 100px;
-  right: 16px;
-  background: white;
-  border-left: 6px solid #e60000;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  padding: 12px 14px;
-  max-width: 240px;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 13px;
-  color: #333;
-  z-index: 10000;
-">
-  <div style="margin-bottom: 6px;">
-    🎬 Just remove the pop ads and enjoy watching!
-  </div>
-  <button onclick="document.getElementById('reminder-box').style.display='none'" style="
-    background: #e60000;
-    color: white;
-    border: none;
-    padding: 4px 10px;
-    font-size: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-  ">Dismiss</button>
 </div>
 
 </body>
