@@ -387,6 +387,25 @@ body {
   display: block;
 }
 
+.list {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 12px;
+  padding: 12px 0;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+}
+
+.list:active {
+  cursor: grabbing;
+}
+
+.list > * {
+  flex: 0 0 auto;
+  width: 140px; /* Adjust based on your card style */
+  transition: transform 0.3s ease;
+}
 
 
 
