@@ -14,55 +14,11 @@
  
   <link rel="preload" href="js/home.js" as="script" />
   <script defer src="js/home.js"></script>
-  <script type='text/javascript' src='//pl26741312.profitableratecpm.com/05/c2/5a/05c25a7b0141bfad1daacbd4261dc066.js'></script>
-  <script async="async" data-cfasync="false" src="//pl26741459.profitableratecpm.com/1baf9dcb2f371ef2a2caaa97bf82e9bc/invoke.js"></script>
-  <div id="container-1baf9dcb2f371ef2a2caaa97bf82e9bc"></div>
-
-  <style>
-    .banner-slider {
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      height: 300px;
-    }
-
-    .banner-slide {
-      display: none;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .banner-slide.active {
-      display: block;
-      animation: fade 1s ease-in-out;
-    }
-
-    @keyframes fade {
-      from {opacity: 0.3;}
-      to {opacity: 1;}
-    }
-
-    .banner-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .banner-caption {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      color: white;
-      font-size: 24px;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 10px;
-      border-radius: 6px;
-    }
-  </style>
+<script type='text/javascript' src='//pl26741312.profitableratecpm.com/05/c2/5a/05c25a7b0141bfad1daacbd4261dc066.js'></script>
+<script async="async" data-cfasync="false" src="//pl26741459.profitableratecpm.com/1baf9dcb2f371ef2a2caaa97bf82e9bc/invoke.js"></script>
+<div id="container-1baf9dcb2f371ef2a2caaa97bf82e9bc"></div>
 </head>
+
 <body>
   <!-- Navbar -->
   <header class="navbar" role="banner">
@@ -81,37 +37,236 @@
     </nav>
   </header>
 
-  <!-- Banner Slider -->
-  <div class="banner-slider" id="banner-slider">
-    <div class="banner-slide active">
-      <img src="movie1.jpg" alt="Movie 1">
-      <div class="banner-caption">Watch Movie 1 Now!</div>
+  <!-- Banner -->
+  <section class="banner" id="banner" role="region" aria-live="polite">
+    <h1 id="banner-title"></h1>
+  </section>
+
+  <!-- Trending Rows -->
+  <main role="main">
+    <section class="row" aria-labelledby="movies-heading">
+      <h2 id="movies-heading">Trending Movies</h2>
+      <div class="list" id="movies-list" role="list" aria-label="Trending Movies"></div>
+    </section>
+
+    <section class="row" aria-labelledby="tvshows-heading">
+      <h2 id="tvshows-heading">Trending TV Shows</h2>
+      <div class="list" id="tvshows-list" role="list" aria-label="Trending TV Shows"></div>
+    </section>
+
+    <section class="row" aria-labelledby="anime-heading">
+      <h2 id="anime-heading">Trending Anime</h2>
+      <div class="list" id="anime-list" role="list" aria-label="Trending Anime"></div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <aside
+    class="modal"
+    id="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
+    hidden
+  >
+    <div class="modal-content">
+      <button class="close" aria-label="Close modal" onclick="closeModal()" style="color: red;">
+        &times;
+      </button>
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="" />
+        <div class="modal-text">
+          <h2 id="modal-title"></h2>
+          <div class="stars" id="modal-rating" aria-label="Rating"></div>
+          <p id="modal-description"></p>
+        </div>
+      </div>
+
+      <div class="server-selector">
+  <label for="server">Change Server:</label>
+  <select id="server" onchange="changeServer()" aria-controls="modal-video">
+    <option value="vidsrc.cc">Vidsrc.cc</option>
+    <option value="vidsrc.me">Vidsrc.me</option>
+    <option value="player.videasy.net">Player.Videasy.net</option>
+    <option value="openload.co">Openload.co</option>
+    <option value="streamango.com">Streamango.com</option>
+    <option value="vidcloud.co">Vidcloud.co</option>
+    <option value="streamtape.com">Streamtape.com</option>
+    <option value="doodstream.com">Doodstream.com</option>
+  </select>
+</div>
+
+      <iframe
+        id="modal-video"
+        width="100%"
+        height="315"
+        frameborder="0"
+        allowfullscreen
+        title="Video Player"
+      ></iframe>
     </div>
-    <div class="banner-slide">
-      <img src="movie2.jpg" alt="Movie 2">
-      <div class="banner-caption">Catch Movie 2 in HD</div>
-    </div>
-    <div class="banner-slide">
-      <img src="movie3.jpg" alt="Movie 3">
-      <div class="banner-caption">Stream Movie 3 Instantly</div>
-    </div>
+  </aside>
+
+  <!-- Search Modal -->
+  <aside
+    class="search-modal"
+    id="search-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="search-label"
+    hidden
+  >
+    <button class="close" aria-label="Close search modal" onclick="closeSearchModal()" style="color: red;">
+      &times;
+    </button>
+    <label for="search-input" id="search-label" class="visually-hidden">Search for a movie or show</label>
+    <input
+      type="search"
+      id="search-input"
+      placeholder="Search for a movie or show..."
+      oninput="searchTMDB()"
+      aria-describedby="search-results"
+    />
+    <div class="results" id="search-results" role="list"></div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+<div class="disclaimer-section" style="color: white;"> 
+  <p>
+    ChillFlix does not host or upload any videos. All content is provided by third-party services and is publicly available online.
+    If you have any legal issues, please contact the appropriate media file owners or host sites.
+  </p>
+  <div class="disclaimer-links" style="margin-top: 10px;">
+    <a href="/about.html" style="color: white; text-decoration: underline;">About Us</a>
+    <a href="/contact.html" style="color: white; text-decoration: underline; margin-left: 15px;">Contact Us</a>
+  </div>
+  <p style="margin-top: 15px; font-size: 14px; color: white;">
+    © 2025 ChillFlix. All rights reserved.
+  </p>
+</div>
+<div class="about-us-section"> ... </div>
+  </footer>
+<!-- Reminder Message -->
+<div id="reminder-box" style="
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  background: white;
+  border-left: 6px solid #e60000;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 12px 14px;
+  max-width: 240px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: #333;
+  z-index: 10000;
+">
+  <div style="margin-bottom: 6px;">
+    🎬 Just remove pop ads and enjoy watching!
+  </div>
+  <button onclick="document.getElementById('reminder-box').style.display='none'" style="
+    background: #e60000;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  ">Dismiss</button>
+</div>
+
+<!-- Smaller Floating Widget -->
+<div id="floating-widget" style="
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: linear-gradient(135deg, #e60000, #0055ff);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 6px 10px;
+  font-family: 'Segoe UI', sans-serif;
+  z-index: 9999;
+  width: 140px;
+  font-size: 11px;
+  line-height: 1.2;
+  user-select: none;
+  cursor: default;
+">
+  <div style="
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 4px;
+    white-space: nowrap;
+  ">
+    <span style="color: #0055ff;">Chill</span><span style="color: #e60000;">Flix</span> 🔥
   </div>
 
-  <script>
-    const slides = document.querySelectorAll(".banner-slide");
-    let currentSlide = 0;
+  <div style="display: flex; align-items: center; margin-bottom: 2px;">
+    <span style="margin-right: 4px;">👤</span>
+    <span id="userCount">0 Users</span>
+  </div>
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove("active");
-        if (i === index) slide.classList.add("active");
-      });
+  <div style="display: flex; align-items: center;">
+    <span style="margin-right: 4px;">🌍</span>
+    <span id="countryCount">0 Countries</span>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sampleCountries = ["US", "IN", "UK", "DE", "FR", "BR", "JP", "AU", "CA", "NG"];
+
+    function simulateStats() {
+      const usersOnline = Math.floor(Math.random() * 90) + 10;
+      const countries = new Set();
+      for (let i = 0; i < usersOnline; i++) {
+        countries.add(sampleCountries[Math.floor(Math.random() * sampleCountries.length)]);
+      }
+
+      document.getElementById('userCount').textContent = `${usersOnline} Users`;
+      document.getElementById('countryCount').textContent = `${countries.size} Countries`;
     }
 
-    setInterval(() => {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    }, 5000);
-  </script>
+    simulateStats();
+    setInterval(simulateStats, 5000);
+  });
+</script>
+
+<div id="disclaimer-box" style="
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  max-width: 300px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  z-index: 9999;
+">
+  <p>
+    📢 ChillFlix is a non-profit project. We do not host any content on our servers. All content is publicly sourced.
+  </p>
+  <button onclick="document.getElementById('disclaimer-box').style.display='none'" style="
+    margin-top: 10px;
+    background: #e50914;
+    border: none;
+    padding: 6px 12px;
+    color: white;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+  ">
+    I Understand
+  </button>
+</div>
+
 </body>
-</html>
+
