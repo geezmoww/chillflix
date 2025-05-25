@@ -279,6 +279,34 @@
   <div id="location-info"></div>
   <div class="region-list" id="region-list"></div>
 </div>
+<script>
+  // Get user's IP location
+  fetch("https://ipinfo.io/json?token=YOUR_TOKEN_HERE") // Get a free token at ipinfo.io
+    .then(res => res.json())
+    .then(data => {
+      const { city, region, country } = data;
+      const flag = `https://flagcdn.com/16x12/${country.toLowerCase()}.png`;
+      document.getElementById('location-info').innerHTML = `
+        📍 You: ${city}, ${region} <img class="region-flag" src="${flag}" alt="${country}" />
+      `;
+
+      // Simulated online users (you'll replace this with Firebase/MySQL later)
+      const regions = [
+        { place: "Ohio, US", count: 1, code: "us" },
+        { place: "Metro Manila, PH", count: 4, code: "ph" },
+        { place: "Hesse, DE", count: 1, code: "de" },
+        { place: `${region}, ${country}`, count: 1, code: country.toLowerCase() },
+      ];
+
+      document.getElementById('online-count').innerText = regions.reduce((sum, r) => sum + r.count, 0);
+
+      const list = regions.map(r =>
+        `<div><img class="region-flag" src="https://flagcdn.com/16x12/${r.code}.png" /> ${r.place}: ${r.count}</div>`
+      ).join("");
+
+      document.getElementById('region-list').innerHTML = list;
+    });
+</script>
 
 </body>
 
