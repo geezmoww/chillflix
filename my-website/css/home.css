@@ -45,11 +45,18 @@ body {
 
 /* SEARCH */
 .search-bar {
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: 10px 16px;       /* More inner space */
+  border-radius: 8px;       /* Smoother edges */
   border: none;
   background: #222;
   color: #fff;
+  font-size: 16px;          /* Bigger text */
+  width: 300px;             /* Wider */
+  height: 44px;             /* Taller */
+}
+
+.search-bar::placeholder {
+  color: #aaa;              /* Optional: better placeholder color */
 }
 
 /* BANNER */
