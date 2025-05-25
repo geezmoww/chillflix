@@ -16,12 +16,150 @@
   
   <link rel="preload" href="js/home.js" as="script" />
   <script defer src="js/home.js"></script>
-<script type='text/javascript' src='//pl26741312.profitableratecpm.com/05/c2/5a/05c25a7b0141bfad1daacbd4261dc066.js'></script>
-<script async="async" data-cfasync="false" src="//pl26741459.profitableratecpm.com/1baf9dcb2f371ef2a2caaa97bf82e9bc/invoke.js"></script>
-<div id="container-1baf9dcb2f371ef2a2caaa97bf82e9bc"></div>
+  <script type='text/javascript' src='//pl26741312.profitableratecpm.com/05/c2/5a/05c25a7b0141bfad1daacbd4261dc066.js'></script>
+  <script async="async" data-cfasync="false" src="//pl26741459.profitableratecpm.com/1baf9dcb2f371ef2a2caaa97bf82e9bc/invoke.js"></script>
+  <div id="container-1baf9dcb2f371ef2a2aaa97bf82e9bc"></div>
+
+  <!-- Netflix Theme CSS added below -->
+  <style>
+    /* Netflix-inspired colors */
+    :root {
+      --netflix-red: #E50914;
+      --background-dark: #141414;
+      --text-white: #fff;
+      --text-muted: #b3b3b3;
+    }
+
+    /* Reset and base */
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: var(--background-dark);
+      color: var(--text-white);
+    }
+
+    a {
+      color: var(--netflix-red);
+      text-decoration: none;
+    }
+
+    /* Header */
+    header {
+      background-color: #111;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .logo {
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--netflix-red);
+      letter-spacing: 2px;
+    }
+
+    header nav a {
+      margin-left: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    header nav a:hover {
+      color: var(--netflix-red);
+    }
+
+    /* Main container */
+    main {
+      padding: 20px 40px;
+    }
+
+    /* Section title */
+    h2.section-title {
+      font-weight: 700;
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    /* Movie cards grid */
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .movie-card {
+      background-color: #222;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+
+    .movie-poster {
+      width: 100%;
+      display: block;
+    }
+
+    .movie-title {
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Button style */
+    .btn-red {
+      background-color: var(--netflix-red);
+      color: white;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-red:hover {
+      background-color: #b0060f;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid #333;
+      margin-top: 40px;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      main {
+        padding: 10px 20px;
+      }
+
+      .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+    }
+  </style>
+
 </head>
 
 <body>
+  <!-- Your existing body content below -->
   <!-- Navbar -->
   <header class="navbar" role="banner">
     <a href="index.html" class="logo" aria-label="ChillFlix Home">
@@ -139,92 +277,104 @@
       </nav>
     </div>
   </footer>
-<!-- Small Floating Widget -->
-<div id="floating-widget" style="
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  background: linear-gradient(135deg, #e60000, #0055ff);
-  color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  padding: 10px 14px;
-  font-family: 'Segoe UI', sans-serif;
-  z-index: 9999;
-  width: 180px;
-  font-size: 13px;
-">
-  <!-- ChillFlix Logo -->
-  <div style="
-    font-weight: bold;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 6px;
-  ">
-    <span style="color: #0055ff;">Chill</span><span style="color: #e60000;">Flix</span> 🔥
+  <!-- Small Floating Widget -->
+  <div
+    id="floating-widget"
+    style="
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, #e60000, #0055ff);
+      color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      padding: 10px 14px;
+      font-family: 'Segoe UI', sans-serif;
+      z-index: 9999;
+      width: 180px;
+      font-size: 13px;
+    "
+  >
+    <!-- ChillFlix Logo -->
+    <div
+      style="
+        font-weight: bold;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 6px;
+      "
+    >
+      <span style="color: #0055ff;">Chill</span><span style="color: #e60000;">Flix</span> 🔥
+    </div>
+
+    <!-- Stats -->
+    <div style="display: flex; align-items: center; margin-bottom: 4px;">
+      <span style="margin-right: 6px;">👤</span>
+      <span id="userCount">0 Users</span>
+    </div>
+
+    <div style="display: flex; align-items: center;">
+      <span style="margin-right: 6px;">🌍</span>
+      <span id="countryCount">0 Countries</span>
+    </div>
   </div>
 
-  <!-- Stats -->
-  <div style="display: flex; align-items: center; margin-bottom: 4px;">
-    <span style="margin-right: 6px;">👤</span>
-    <span id="userCount">0 Users</span>
-  </div>
+  <script>
+    const sampleCountries = ["US", "IN", "UK", "DE", "FR", "BR", "JP", "AU", "CA", "NG"];
 
-  <div style="display: flex; align-items: center;">
-    <span style="margin-right: 6px;">🌍</span>
-    <span id="countryCount">0 Countries</span>
-  </div>
-</div>
+    function simulateStats() {
+      const usersOnline = Math.floor(Math.random() * 90) + 10;
+      const countries = new Set();
+      for (let i = 0; i < usersOnline; i++) {
+        countries.add(sampleCountries[Math.floor(Math.random() * sampleCountries.length)]);
+      }
 
-<script>
-  const sampleCountries = ["US", "IN", "UK", "DE", "FR", "BR", "JP", "AU", "CA", "NG"];
-
-  function simulateStats() {
-    const usersOnline = Math.floor(Math.random() * 90) + 10;
-    const countries = new Set();
-    for (let i = 0; i < usersOnline; i++) {
-      countries.add(sampleCountries[Math.floor(Math.random() * sampleCountries.length)]);
+      document.getElementById("userCount").textContent = `${usersOnline} Users`;
+      document.getElementById("countryCount").textContent = `${countries.size} Countries`;
     }
 
-    document.getElementById('userCount').textContent = `${usersOnline} Users`;
-    document.getElementById('countryCount').textContent = `${countries.size} Countries`;
-  }
-
-  simulateStats();
-  setInterval(simulateStats, 5000);
-</script>
-<!-- Reminder Message -->
-<div id="reminder-box" style="
-  position: fixed;
-  bottom: 100px;
-  right: 16px;
-  background: white;
-  border-left: 6px solid #e60000;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  padding: 12px 14px;
-  max-width: 240px;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 13px;
-  color: #333;
-  z-index: 10000;
-">
-  <div style="margin-bottom: 6px;">
-    🎬 Just remove the pop ads and enjoy watching!
+    simulateStats();
+    setInterval(simulateStats, 5000);
+  </script>
+  <!-- Reminder Message -->
+  <div
+    id="reminder-box"
+    style="
+      position: fixed;
+      bottom: 100px;
+      right: 16px;
+      background: white;
+      border-left: 6px solid #e60000;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 12px 14px;
+      max-width: 240px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: #333;
+      z-index: 10000;
+    "
+  >
+    <div style="margin-bottom: 6px;">🎬 Just remove the pop ads and enjoy watching!</div>
+    <button
+      onclick="document.getElementById('reminder-box').style.display='none'"
+      style="
+        background: #e60000;
+        color: white;
+        border: none;
+        padding: 4px 10px;
+        font-size: 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+      "
+    >
+      Dismiss
+    </button>
   </div>
-  <button onclick="document.getElementById('reminder-box').style.display='none'" style="
-    background: #e60000;
-    color: white;
-    border: none;
-    padding: 4px 10px;
-    font-size: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-  ">Dismiss</button>
-</div>
-
 </body>
+
+</html>
 
 
 
