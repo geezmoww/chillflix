@@ -233,18 +233,18 @@
   </div>
 </div>
 <script>
+  <script>
   function dismissDisclaimer() {
     document.getElementById("disclaimer").style.display = "none";
     localStorage.setItem("disclaimerAccepted", "true");
   }
 
-  window.onload = function () {
-    if (!localStorage.getItem("disclaimerAccepted")) {
+  document.addEventListener("DOMContentLoaded", function () {
+    const disclaimerAccepted = localStorage.getItem("disclaimerAccepted");
+    if (!disclaimerAccepted) {
       document.getElementById("disclaimer").style.display = "flex";
-    } else {
-      document.getElementById("disclaimer").style.display = "none";
     }
-  };
+  });
 </script>
 
 </body>
