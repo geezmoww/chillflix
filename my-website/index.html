@@ -50,24 +50,24 @@
   <script>
     // Your Firebase config (replace with your actual config)
     const firebaseConfig = {
-      apiKey: "AIzaSyAkq7n1-B5SU-_8Vmn4mBsx7qlkW9EioFs",
-      authDomain: "chillflixtracker.firebaseapp.com",
-      databaseURL: "https://chillflixtracker-default-rtdb.firebaseio.com",
-      projectId: "chillflixtracker",
-      storageBucket: "chillflixtracker.firebasestorage.app",
-      messagingSenderId: "52011469409",
-      appId: "1:52011469409:web:65e9bf90f82d68cda5b820",
-      measurementId: "G-BP1KSSKVNK"
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID",
+      measurementId: "YOUR_MEASUREMENT_ID"
     };
 
     const app = firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
     // Detect user country and track user in Firebase
-    fetch('https://ipinfo.io/json?token=d78de3b32deede')
+    fetch('https://ipapi.co/json/')
       .then(res => res.json())
       .then(data => {
-        const country = data.country || 'Unknown';
+        const country = data.country_name || 'Unknown';
         const userRef = db.ref("activeUsers").push();
 
         // Add current user with country and timestamp
@@ -104,5 +104,6 @@
   </script>
 </body>
 </html>
+
 
 
