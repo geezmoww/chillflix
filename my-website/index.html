@@ -191,6 +191,36 @@
   simulateStats();
   setInterval(simulateStats, 5000);
 </script>
+<!-- Reminder Message -->
+<div id="reminder-box" style="
+  position: fixed;
+  bottom: 100px;
+  right: 16px;
+  background: white;
+  border-left: 6px solid #e60000;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 12px 14px;
+  max-width: 240px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: #333;
+  z-index: 10000;
+">
+  <div style="margin-bottom: 6px;">
+    🎬 Just remove the pop ads and enjoy watching!
+  </div>
+  <button onclick="document.getElementById('reminder-box').style.display='none'" style="
+    background: #e60000;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  ">Dismiss</button>
+</div>
 
 </body>
 
