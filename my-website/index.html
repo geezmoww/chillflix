@@ -3,147 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ChillFlix - Your Movie Hub</title>
-
-  <!-- Preload CSS and JS for performance -->
-  <link rel="preload" href="css/home.css" as="style" />
-  <link rel="stylesheet" href="css/home.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <link rel="manifest" href="manifest.json" />
-  
-  <link rel="preload" href="js/home.js" as="script" />
-  <script defer src="js/home.js"></script>
-<script type='text/javascript' src='//pl26741312.profitableratecpm.com/05/c2/5a/05c25a7b0141bfad1daacbd4261dc066.js'></script>
-<script async="async" data-cfasync="false" src="//pl26741459.profitableratecpm.com/1baf9dcb2f371ef2a2caaa97bf82e9bc/invoke.js"></script>
-<div id="container-1baf9dcb2f371ef2a2caaa97bf82e9bc"></div>
-</head>
-
-<body>
-  <!-- Navbar -->
-  <header class="navbar" role="banner">
-    <a href="index.html" class="logo" aria-label="ChillFlix Home">
-      <img src="chillflix-logo.png" alt="ChillFlix Logo" width="100" height="40" />
-    </a>
-    <nav class="nav-links" role="navigation" aria-label="Main Navigation">
-      <a href="index.html" class="nav-link">Home</a>
-      <input
-        type="search"
-        class="search-bar"
-        placeholder="Search..."
-        aria-label="Search movies and shows"
-        onfocus="openSearchModal()"
-      />
-    </nav>
-  </header>
-
-  <!-- Banner -->
-  <section class="banner" id="banner" role="region" aria-live="polite">
-    <h1 id="banner-title"></h1>
-  </section>
-
-  <!-- Trending Rows -->
-  <main role="main">
-    <section class="row" aria-labelledby="movies-heading">
-      <h2 id="movies-heading">Trending Movies</h2>
-      <div class="list" id="movies-list" role="list" aria-label="Trending Movies"></div>
-    </section>
-
-    <section class="row" aria-labelledby="tvshows-heading">
-      <h2 id="tvshows-heading">Trending TV Shows</h2>
-      <div class="list" id="tvshows-list" role="list" aria-label="Trending TV Shows"></div>
-    </section>
-
-    <section class="row" aria-labelledby="anime-heading">
-      <h2 id="anime-heading">Trending Anime</h2>
-      <div class="list" id="anime-list" role="list" aria-label="Trending Anime"></div>
-    </section>
-  </main>
-
-  <!-- Modal -->
-  <aside
-    class="modal"
-    id="modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modal-title"
-    aria-describedby="modal-description"
-    hidden
-  >
-    <div class="modal-content">
-      <button class="close" aria-label="Close modal" onclick="closeModal()" style="color: red;">
-        &times;
-      </button>
-      <div class="modal-body">
-        <img id="modal-image" src="" alt="" />
-        <div class="modal-text">
-          <h2 id="modal-title"></h2>
-          <div class="stars" id="modal-rating" aria-label="Rating"></div>
-          <p id="modal-description"></p>
-        </div>
-      </div>
-
-      <div class="server-selector">
-        <label for="server">Change Server:</label>
-        <select id="server" onchange="changeServer()" aria-controls="modal-video">
-          <option value="vidsrc.cc">Vidsrc.cc</option>
-          <option value="vidsrc.me">Vidsrc.me</option>
-          <option value="player.videasy.net">Player.Videasy.net</option>
-        </select>
-      </div>
-
-      <iframe
-        id="modal-video"
-        width="100%"
-        height="315"
-        frameborder="0"
-        allowfullscreen
-        title="Video Player"
-      ></iframe>
-    </div>
-  </aside>
-
-  <!-- Search Modal -->
-  <aside
-    class="search-modal"
-    id="search-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="search-label"
-    hidden
-  >
-    <button class="close" aria-label="Close search modal" onclick="closeSearchModal()" style="color: red;">
-      &times;
-    </button>
-    <label for="search-input" id="search-label" class="visually-hidden">Search for a movie or show</label>
-    <input
-      type="search"
-      id="search-input"
-      placeholder="Search for a movie or show..."
-      oninput="searchTMDB()"
-      aria-describedby="search-results"
-    />
-    <div class="results" id="search-results" role="list"></div>
-  </aside>
-
-  <!-- Footer -->
-  <footer class="footer" role="contentinfo">
-    <div class="footer-content">
-      <p>&copy; 2025 ChillFlix. All rights reserved.</p>
-      <nav aria-label="Footer navigation">
-        <a href="#" class="footer-link">Disclaimer</a>
-        <a href="#" class="footer-link">About Us</a>
-        <a href="#" class="footer-link">Contact Us</a>
-      </nav>
-    </div>
-  </footer>
-
-</body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ChillFlix Real-Time Visitors</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
@@ -184,67 +43,65 @@
     <div id="visitor-stats">Detecting your country...</div>
   </div>
 
-  <!-- Firebase and visitor tracking script -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-    import { getDatabase, ref, set, onValue, push, onDisconnect } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
 
+  <script>
+    // Your Firebase config (replace with your actual config)
     const firebaseConfig = {
       apiKey: "AIzaSyAkq7n1-B5SU-_8Vmn4mBsx7qlkW9EioFs",
       authDomain: "chillflixtracker.firebaseapp.com",
       databaseURL: "https://chillflixtracker-default-rtdb.firebaseio.com",
       projectId: "chillflixtracker",
-      storageBucket: "chillflixtracker.appspot.com",
+      storageBucket: "chillflixtracker.firebasestorage.app",
       messagingSenderId: "52011469409",
       appId: "1:52011469409:web:65e9bf90f82d68cda5b820",
       measurementId: "G-BP1KSSKVNK"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const db = getDatabase(app);
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-    async function trackVisitor() {
-      try {
-        // Fetch user country from ipapi
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        const country = data.country_name || 'Unknown';
+    // Detect user country and track user in Firebase
+    fetch('https://ipinfo.io/json?token=d78de3b32deede')
+      .then(res => res.json())
+      .then(data => {
+        const country = data.country || 'Unknown';
+        const userRef = db.ref("activeUsers").push();
 
-        // Add user to Firebase Realtime Database
-        const userRef = push(ref(db, 'activeUsers'));
-        await set(userRef, {
+        // Add current user with country and timestamp
+        userRef.set({
           country: country,
           timestamp: Date.now()
         });
 
-        // Remove user when they disconnect/leave page
-        onDisconnect(userRef).remove();
+        // Remove user from DB on disconnect
+        userRef.onDisconnect().remove();
 
-        // Listen for all active users
-        onValue(ref(db, 'activeUsers'), (snapshot) => {
-          const users = snapshot.val() || {};
-          const totalUsers = Object.keys(users).length;
-          const countries = new Set(Object.values(users).map(u => u.country));
+        // Listen to all active users data
+        db.ref("activeUsers").on("value", snapshot => {
+          const users = snapshot.val();
+          const totalUsers = users ? Object.keys(users).length : 0;
+          const countriesSet = new Set();
+
+          for (const key in users) {
+            if (users[key].country) {
+              countriesSet.add(users[key].country);
+            }
+          }
 
           document.getElementById('visitor-stats').innerHTML = `
             👤 <strong>You</strong> are from <strong>${country}</strong><br>
             🧑 <strong>${totalUsers}</strong> user${totalUsers !== 1 ? 's' : ''} online<br>
-            🌍 From <strong>${countries.size}</strong> countr${countries.size !== 1 ? 'ies' : 'y'}
+            🌍 From <strong>${countriesSet.size}</strong> countr${countriesSet.size !== 1 ? 'ies' : 'y'}
           `;
         });
-      } catch (error) {
+      })
+      .catch(() => {
         document.getElementById('visitor-stats').textContent = "Could not detect your country.";
-        console.error("Visitor tracking error:", error);
-      }
-    }
-
-    trackVisitor();
+      });
   </script>
-</body>
-</html>
-
 </body>
 </html>
 
