@@ -232,5 +232,19 @@
     <button onclick="dismissDisclaimer()">I Understand</button>
   </div>
 </div>
+<script>
+  function dismissDisclaimer() {
+    document.getElementById("disclaimer").style.display = "none";
+    localStorage.setItem("disclaimerAccepted", "true");
+  }
+
+  window.onload = function () {
+    if (!localStorage.getItem("disclaimerAccepted")) {
+      document.getElementById("disclaimer").style.display = "flex";
+    } else {
+      document.getElementById("disclaimer").style.display = "none";
+    }
+  };
+</script>
 
 </body>
