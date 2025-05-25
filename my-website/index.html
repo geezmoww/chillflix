@@ -175,5 +175,24 @@
     <span id="countryCount">0 Countries</span>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sampleCountries = ["US", "IN", "UK", "DE", "FR", "BR", "JP", "AU", "CA", "NG"];
+
+    function simulateStats() {
+      const usersOnline = Math.floor(Math.random() * 90) + 10;
+      const countries = new Set();
+      for (let i = 0; i < usersOnline; i++) {
+        countries.add(sampleCountries[Math.floor(Math.random() * sampleCountries.length)]);
+      }
+
+      document.getElementById('userCount').textContent = `${usersOnline} Users`;
+      document.getElementById('countryCount').textContent = `${countries.size} Countries`;
+    }
+
+    simulateStats();
+    setInterval(simulateStats, 5000);
+  });
+</script>
 
 </body>
