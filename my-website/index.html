@@ -139,10 +139,27 @@
   </footer>
 
 </body>
-<!-- Inline Online User Count -->
-<a href="https://whos.amung.us/stats/chillflix/" target="_blank">
-  <img src="https://whos.amung.us/counter/chillflix.png" alt="Users online">
-</a>
+<div id="user-info" style="padding: 10px; background: #111; color: #0f0; font-family: monospace;">
+  Loading visitor info...
+</div>
+
+<script>
+  // Fetch user's country
+  fetch('https://ipapi.co/json/')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('user-info').innerHTML = `
+        🌍 You are visiting from <strong>${data.country_name}</strong><br>
+        🧑 Active users: <span id="live-users">...</span>
+      `;
+    });
+
+  // Simulated active users count
+  let activeUsers = Math.floor(Math.random() * 10) + 1;
+  setInterval(() => {
+    document.getElementById('live-users').innerText = activeUsers;
+  }, 1000);
+</script>
 
 </body>
 </html>
