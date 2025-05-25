@@ -44,21 +44,28 @@
 
   <!-- Trending Rows -->
   <main role="main">
-    <section class="row" aria-labelledby="movies-heading">
-      <h2 id="movies-heading">Trending Movies</h2>
-      <div class="list" id="movies-list" role="list" aria-label="Trending Movies"></div>
-    </section>
+  <section class="row" aria-labelledby="movies-heading" style="position: relative;">
+    <h2 id="movies-heading">Trending Movies</h2>
+    <button class="scroll-btn left" onclick="scrollList('movies-list', -300)" aria-label="Scroll left">&#9664;</button>
+    <div class="list" id="movies-list" role="list" aria-label="Trending Movies"></div>
+    <button class="scroll-btn right" onclick="scrollList('movies-list', 300)" aria-label="Scroll right">&#9654;</button>
+  </section>
 
-    <section class="row" aria-labelledby="tvshows-heading">
-      <h2 id="tvshows-heading">Trending TV Shows</h2>
-      <div class="list" id="tvshows-list" role="list" aria-label="Trending TV Shows"></div>
-    </section>
+  <section class="row" aria-labelledby="tvshows-heading" style="position: relative;">
+    <h2 id="tvshows-heading">Trending TV Shows</h2>
+    <button class="scroll-btn left" onclick="scrollList('tvshows-list', -300)" aria-label="Scroll left">&#9664;</button>
+    <div class="list" id="tvshows-list" role="list" aria-label="Trending TV Shows"></div>
+    <button class="scroll-btn right" onclick="scrollList('tvshows-list', 300)" aria-label="Scroll right">&#9654;</button>
+  </section>
 
-    <section class="row" aria-labelledby="anime-heading">
-      <h2 id="anime-heading">Trending Anime</h2>
-      <div class="list" id="anime-list" role="list" aria-label="Trending Anime"></div>
-    </section>
-  </main>
+  <section class="row" aria-labelledby="anime-heading" style="position: relative;">
+    <h2 id="anime-heading">Trending Anime</h2>
+    <button class="scroll-btn left" onclick="scrollList('anime-list', -300)" aria-label="Scroll left">&#9664;</button>
+    <div class="list" id="anime-list" role="list" aria-label="Trending Anime"></div>
+    <button class="scroll-btn right" onclick="scrollList('anime-list', 300)" aria-label="Scroll right">&#9654;</button>
+  </section>
+</main>
+
 
   <!-- Modal -->
   <aside
