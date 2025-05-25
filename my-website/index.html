@@ -137,45 +137,40 @@
       </nav>
     </div>
   </footer>
-<!-- Floating Widget -->
+<!-- Small Floating Widget -->
 <div id="floating-widget" style="
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 16px;
+  right: 16px;
   background: linear-gradient(135deg, #e60000, #0055ff);
   color: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  padding: 10px 14px;
   font-family: 'Segoe UI', sans-serif;
   z-index: 9999;
-  width: 260px;
-  backdrop-filter: blur(4px);
+  width: 180px;
+  font-size: 13px;
 ">
-  <!-- Logo -->
+  <!-- ChillFlix Logo -->
   <div style="
     font-weight: bold;
-    font-size: 22px;
+    font-size: 14px;
     text-align: center;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+    margin-bottom: 6px;
   ">
-    <span style="color: #0055ff;">Chill</span><span style="color: #e60000;">Flix</span>
-    <span style="font-size: 20px;">🔥</span>
+    <span style="color: #0055ff;">Chill</span><span style="color: #e60000;">Flix</span> 🔥
   </div>
 
   <!-- Stats -->
-  <div style="font-size: 16px; margin-bottom: 8px; display: flex; align-items: center;">
-    <span style="margin-right: 8px;">👤</span>
-    <span id="userCount">Users Online: 0</span>
+  <div style="display: flex; align-items: center; margin-bottom: 4px;">
+    <span style="margin-right: 6px;">👤</span>
+    <span id="userCount">0 Users</span>
   </div>
 
-  <div style="font-size: 16px; display: flex; align-items: center;">
-    <span style="margin-right: 8px;">🌍</span>
-    <span id="countryCount">Countries: 0</span>
+  <div style="display: flex; align-items: center;">
+    <span style="margin-right: 6px;">🌍</span>
+    <span id="countryCount">0 Countries</span>
   </div>
 </div>
 
@@ -189,8 +184,8 @@
       countries.add(sampleCountries[Math.floor(Math.random() * sampleCountries.length)]);
     }
 
-    document.getElementById('userCount').textContent = `Users Online: ${usersOnline}`;
-    document.getElementById('countryCount').textContent = `Countries: ${countries.size}`;
+    document.getElementById('userCount').textContent = `${usersOnline} Users`;
+    document.getElementById('countryCount').textContent = `${countries.size} Countries`;
   }
 
   simulateStats();
