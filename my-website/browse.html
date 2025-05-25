@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Browse - ChillFlix</title>
+  <link rel="stylesheet" href="css/home.css" />
+  <style>
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px;
+    }
+
+    .filters select {
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 6px;
+    }
+
+    .browse-results {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="chillflix-logo.png" alt="ChillFlix Logo" width="100" />
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="browse.html" class="nav-link">Browse</a>
+    </nav>
+  </header>
+
+  <section class="filters">
+    <select id="type-filter">
+      <option value="">All Types</option>
+      <option value="movie">Movie</option>
+      <option value="tv">TV Show</option>
+      <option value="anime">Anime</option>
+    </select>
+
+    <select id="genre-filter">
+      <option value="">All Genres</option>
+      <option value="action">Action</option>
+      <option value="comedy">Comedy</option>
+      <option value="drama">Drama</option>
+      <option value="horror">Horror</option>
+      <option value="romance">Romance</option>
+    </select>
+
+    <select id="year-filter">
+      <option value="">All Years</option>
+      <!-- Dynamically generated -->
+    </select>
+
+    <select id="country-filter">
+      <option value="">All Countries</option>
+      <option value="US">United States</option>
+      <option value="IN">India</option>
+      <option value="JP">Japan</option>
+      <option value="KR">Korea</option>
+      <option value="UK">United Kingdom</option>
+    </select>
+
+    <select id="sort-filter">
+      <option value="popularity.desc">Most Popular</option>
+      <option value="release_date.desc">Latest</option>
+      <option value="vote_average.desc">Top Rated</option>
+    </select>
+  </section>
+
+  <section class="browse-results" id="browse-results">
+    <!-- Results injected here -->
+  </section>
+
+  <script>
+    const yearsDropdown = document.getElementById("year-filter");
+    const currentYear = new Date().getFullYear();
+    for (let y = currentYear; y >= 1980; y--) {
+      const option = document.createElement("option");
+      option.value = y;
+      option.textContent = y;
+      yearsDropdown.appendChild(option);
+    }
+
+    const filters = ["type", "genre", "year", "country", "sort"];
+    filters.forEach(id => {
+      document.getElementById(`${id}-filter`).addEventListener("change", fetchBrowseData);
+    });
+
+    function fetchBrowseData() {
+      const type = document.getElementById("type-filter").value;
+      const genre = document.getElementById("genre-filter").value;
+      const year = document.getElementById("year-filter").value;
+      const country = document.getElementById("country-filter").value;
+      const sort = document.getElementById("sort-filter").value;
+
+      // You can plug in your TMDB or custom API here
+      // Simulated data
+      const container = document.getElementById("browse-results");
+      container.innerHTML = "";
+
+      for (let i = 1; i <= 10; i++) {
+        const card = document.createElement("div");
+        card.innerHTML = `
+          <div style="width: 140px; text-align: center;">
+            <img src="https://via.placeholder.com/140x200?text=Movie+${i}" style="width: 100%; border-radius: 10px;" alt="Movie Poster"/>
+            <p style="color: white; margin-top: 8px;">Movie ${i}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      }
+    }
+
+    fetchBrowseData();
+  </script>
+</body>
+</html>
