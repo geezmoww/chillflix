@@ -121,3 +121,14 @@ const API_KEY = 'a60b696953041bed5ae202cbf6cec755';
     }
 
     init();
+
+function goToGenre() {
+  const select = document.getElementById('genre-select');
+  const genreId = select.value;
+  if (genreId) {
+    const section = document.getElementById(genreId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
