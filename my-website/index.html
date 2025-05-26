@@ -23,39 +23,6 @@
 </head>
 
 <body>
-<!-- Banner -->
-<div id="banner" class="banner">
-  <h1 id="banner-title"></h1>
-</div>
-
-<!-- Genre buttons -->
-<div id="genreNav" class="genre-nav"></div>
-
-<!-- Category Title -->
-<h2 id="categoryTitle">Trending Movies</h2>
-
-<!-- Movie Lists (use class "drag-scroll" for horizontal drag scroll) -->
-<div id="movies-list" class="drag-scroll horizontal-list"></div>
-<div id="tvshows-list" class="drag-scroll horizontal-list"></div>
-<div id="anime-list" class="drag-scroll horizontal-list"></div>
-
-<!-- Modal -->
-<div id="modal" class="modal" style="display:none;">
-  <button onclick="closeModal()">Close</button>
-  <h2 id="modal-title"></h2>
-  <img id="modal-image" />
-  <p id="modal-description"></p>
-  <p id="modal-rating"></p>
-  <select id="server" onchange="changeServer()">
-    <option value="vidsrc.cc">vidsrc.cc</option>
-    <option value="vidsrc.me">vidsrc.me</option>
-    <option value="player.videasy.net">player.videasy.net</option>
-  </select>
-  <iframe id="modal-video" width="560" height="315" frameborder="0" allowfullscreen></iframe>
-</div>
-
-<!-- Search Input -->
-<input type="text" id="search-input" placeholder="Search movies..." />
   <!-- Navbar -->
   <header class="navbar" role="banner">
     <a href="index.html" class="logo" aria-label="ChillFlix Home">
