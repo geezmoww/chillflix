@@ -68,6 +68,19 @@
 </style>
 
 </head>
+<div id="chat-container">
+  <div id="chat-header" onclick="toggleChat()">💬 Chat with Viewers</div>
+  <div id="chat-body">
+    <div id="chat-messages" role="log" aria-live="polite"></div>
+    <input
+      type="text"
+      id="chat-input"
+      placeholder="Type your message and hit Enter..."
+      onkeydown="handleChatInput(event)"
+      aria-label="Chat input"
+    />
+  </div>
+</div>
 
 <body>
   <!-- Navbar -->
