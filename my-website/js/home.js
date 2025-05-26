@@ -184,3 +184,28 @@ function enableDragScroll(selector) {
 document.addEventListener("DOMContentLoaded", () => {
   enableDragScroll('.drag-scroll');
 });
+
+let slideIndex = 0;
+
+function showSlides() {
+  const slides = document.getElementsByClassName("slide");
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+
+  slideIndex++;
+  if (slideIndex > slides.length) slideIndex = 1;
+
+  slides[slideIndex - 1].style.display = "block";
+  setTimeout(showSlides, 5000); // Change every 5s
+}
+
+document.addEventListener("DOMContentLoaded", showSlides);
+
+// Play button action
+function playVideo(videoUrl) {
+  const modal = document.getElementById("modal");
+  const video = document.getElementById("modal-video");
+  modal.removeAttribute("hidden");
+  video.src = videoUrl;
+}
