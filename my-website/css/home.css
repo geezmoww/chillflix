@@ -344,52 +344,5 @@
   cursor: grab;
 }
 
-/* === ChillFlix Chatroom === */
-#chat-container {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 280px;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  border-radius: 12px;
-  overflow: hidden;
-  z-index: 9999;
-}
-
-#chat-header {
-  background: linear-gradient(135deg, #0055ff, #e60000);
-  color: white;
-  padding: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: center;
-}
-
-#chat-body {
-  display: none;
-  background: #fff;
-  border: 1px solid #e60000;
-  max-height: 300px;
-  display: flex;
-  flex-direction: column;
-}
-
-#chat-messages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  font-size: 14px;
-  color: #333;
-}
-
-#chat-input {
-  border: none;
-  border-top: 1px solid #ccc;
-  padding: 10px;
-  font-size: 14px;
-  width: 100%;
-  outline: none;
-}
 
 
