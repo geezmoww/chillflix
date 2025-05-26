@@ -9,11 +9,17 @@
   <link rel="preload" href="css/home.css" as="style" />
   <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
+ 
   <link rel="manifest" href="manifest.json" />
  
   <link rel="preload" href="js/home.js" as="script" />
   <script defer src="js/home.js"></script>
+<script type="text/javascript" data-cfasync="false">
+/*<![CDATA[/* */
+(function(){var c=window,s="abd44046de39acd4542a19ad47275633",l=[["siteId",562-752+759-952+5203666],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],p=["d3d3LmFudGlhZGJsb2Nrc3lzdGVtcy5jb20vbHlici9zL2ZhdHJhbWVudC5taW4uanM=","ZDNjb2Q4MHRobjdxbmQuY2xvdWRmcm9udC5uZXQvY3RldGhlci5taW4uanM="],j=-1,h,z,k=function(){clearTimeout(z);j++;if(p[j]&&!(1774198828000<(new Date).getTime()&&1<j)){h=c.document.createElement("script");h.type="text/javascript";h.async=!0;var n=c.document.getElementsByTagName("script")[0];h.src="https://"+atob(p[j]);h.crossOrigin="anonymous";h.onerror=k;h.onload=function(){clearTimeout(z);c[s.slice(0,16)+s.slice(0,16)]||k()};z=setTimeout(k,5E3);n.parentNode.insertBefore(h,n)}};if(!c[s]){try{Object.freeze(c[s]=l)}catch(e){}k()}})();
+/*]]>/* */
+</script>
+<div id="container-1baf9dcb2f371ef2a2caaa97bf82e9bc"></div>
 </head>
 
 <body>
@@ -29,23 +35,10 @@
         class="search-bar"
         placeholder="Search..."
         aria-label="Search movies and shows"
-        id="search-bar-input"
+        onfocus="openSearchModal()"
       />
     </nav>
-
-    <!-- Hamburger Menu Button -->
-    <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" id="hamburger-btn">
-      <span></span><span></span><span></span>
-    </button>
   </header>
-
-  <!-- Nav Menu for Hamburger -->
-  <nav class="nav-menu" id="nav-menu" hidden>
-    <!-- your nav links here, e.g.: -->
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="/about.html" class="nav-link">About Us</a>
-    <a href="/contact.html" class="nav-link">Contact</a>
-  </nav>
 
   <!-- Banner -->
   <section class="banner" id="banner" role="region" aria-live="polite">
@@ -70,69 +63,212 @@
     </section>
   </main>
 
-  <!-- Simplified Modal -->
-  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" style="display:none;">
-    <button class="close" aria-label="Close modal" id="modal-close-btn">&times;</button>
-    <h2 id="modal-title"></h2>
-    <img id="modal-image" alt="" />
-    <p id="modal-description"></p>
-    <div id="modal-rating" aria-label="Rating stars"></div>
-    <label for="server" class="visually-hidden">Select streaming server</label>
-    <select id="server" aria-label="Select streaming server">
-      <option value="vidsrc.cc">VidSrc.cc</option>
-      <option value="vidsrc.me">VidSrc.me</option>
-      <option value="player.videasy.net">VideoEasy</option>
-    </select>
-    <iframe id="modal-video" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+  <!-- Modal -->
+  <aside
+    class="modal"
+    id="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
+    hidden
+  >
+    <div class="modal-content">
+      <button class="close" aria-label="Close modal" onclick="closeModal()" style="color: red;">
+        &times;
+      </button>
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="" />
+        <div class="modal-text">
+          <h2 id="modal-title"></h2>
+          <div class="stars" id="modal-rating" aria-label="Rating"></div>
+          <p id="modal-description"></p>
+        </div>
+      </div>
+
+      <div class="server-selector">
+  <label for="server">Change Server:</label>
+  <select id="server" onchange="changeServer()" aria-controls="modal-video">
+    <option value="vidsrc.cc">Vidsrc.cc</option>
+    <option value="vidsrc.me">Vidsrc.me</option>
+    <option value="player.videasy.net">Player.Videasy.net</option>
+    <option value="openload.co">Openload.co</option>
+    <option value="streamango.com">Streamango.com</option>
+    <option value="vidcloud.co">Vidcloud.co</option>
+    <option value="streamtape.com">Streamtape.com</option>
+    <option value="doodstream.com">Doodstream.com</option>
+  </select>
+</div>
+
+      <iframe
+        id="modal-video"
+        width="100%"
+        height="315"
+        frameborder="0"
+        allowfullscreen
+        title="Video Player"
+      ></iframe>
+    </div>
+  </aside>
+
+  <!-- Search Modal -->
+  <aside
+    class="search-modal"
+    id="search-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="search-label"
+    hidden
+  >
+    <button class="close" aria-label="Close search modal" onclick="closeSearchModal()" style="color: red;">
+      &times;
+    </button>
+    <label for="search-input" id="search-label" class="visually-hidden">Search for a movie or show</label>
+    <input
+      type="search"
+      id="search-input"
+      placeholder="Search for a movie or show..."
+      oninput="searchTMDB()"
+      aria-describedby="search-results"
+    />
+    <div class="results" id="search-results" role="list"></div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+<div class="disclaimer-section" style="color: white;"> 
+  <p>
+    ChillFlix does not host or upload any videos. All content is provided by third-party services and is publicly available online.
+    If you have any legal issues, please contact the appropriate media file owners or host sites.
+  </p>
+  <div class="disclaimer-links" style="margin-top: 10px;">
+    <a href="/about.html" style="color: white; text-decoration: underline;">About Us</a>
+    <a href="/contact.html" style="color: white; text-decoration: underline; margin-left: 15px;">Contact Us</a>
+  </div>
+  <p style="margin-top: 15px; font-size: 14px; color: white;">
+    © 2025 ChillFlix. All rights reserved.
+  </p>
+</div>
+<div class="about-us-section"> ... </div>
+  </footer>
+<!-- Reminder Message -->
+<div id="reminder-box" style="
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  background: white;
+  border-left: 6px solid #e60000;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 12px 14px;
+  max-width: 240px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: #333;
+  z-index: 10000;
+">
+  <div style="margin-bottom: 6px;">
+    🎬 Just remove pop ads and enjoy watching!
+  </div>
+  <button onclick="document.getElementById('reminder-box').style.display='none'" style="
+    background: #e60000;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  ">Dismiss</button>
+</div>
+
+<!-- Smaller Floating Widget -->
+<div id="floating-widget" style="
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: linear-gradient(135deg, #e60000, #0055ff);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 6px 10px;
+  font-family: 'Segoe UI', sans-serif;
+  z-index: 9999;
+  width: 140px;
+  font-size: 11px;
+  line-height: 1.2;
+  user-select: none;
+  cursor: default;
+">
+  <div style="
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 4px;
+    white-space: nowrap;
+  ">
+    <span style="color: #0055ff;">Chill</span><span style="color: #e60000;">Flix</span> 🔥
   </div>
 
-  <!-- Simplified Search Modal -->
-  <div id="search-modal" class="search-modal" hidden role="dialog" aria-modal="true" aria-labelledby="search-label">
-    <button id="search-close" aria-label="Close search">&times;</button>
-    <input id="search-input" type="search" placeholder="Search movies, TV shows, anime..." aria-describedby="search-label" />
-    <div id="search-results" role="listbox" tabindex="0"></div>
+  <div style="display: flex; align-items: center; margin-bottom: 2px;">
+    <span style="margin-right: 4px;">👤</span>
+    <span id="userCount">0 Users</span>
   </div>
 
-  <!-- Footer and other content -->
-  <!-- (Your existing footer and other elements go here as-is) -->
+  <div style="display: flex; align-items: center;">
+    <span style="margin-right: 4px;">🌍</span>
+    <span id="countryCount">0 Countries</span>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sampleCountries = ["US", "IN", "UK", "DE", "FR", "BR", "JP", "AU", "CA", "NG"];
 
-  <script>
-    // Hamburger menu toggle
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const navMenu = document.getElementById('nav-menu');
-    hamburgerBtn.addEventListener('click', () => {
-      const expanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
-      hamburgerBtn.setAttribute('aria-expanded', !expanded);
-      if (navMenu.hasAttribute('hidden')) {
-        navMenu.removeAttribute('hidden');
-      } else {
-        navMenu.setAttribute('hidden', '');
+    function simulateStats() {
+      const usersOnline = Math.floor(Math.random() * 90) + 10;
+      const countries = new Set();
+      for (let i = 0; i < usersOnline; i++) {
+        countries.add(sampleCountries[Math.floor(Math.random() * sampleCountries.length)]);
       }
-    });
 
-    // Open Search Modal when search bar focused
-    const searchBarInput = document.getElementById('search-bar-input');
-    const searchModal = document.getElementById('search-modal');
-    searchBarInput.addEventListener('focus', () => {
-      searchModal.hidden = false;
-      document.getElementById('search-input').focus();
-    });
+      document.getElementById('userCount').textContent = ${usersOnline} Users;
+      document.getElementById('countryCount').textContent = ${countries.size} Countries;
+    }
 
-    // Close Search Modal
-    document.getElementById('search-close').addEventListener('click', () => {
-      searchModal.hidden = true;
-      searchBarInput.blur();
-    });
+    simulateStats();
+    setInterval(simulateStats, 5000);
+  });
+</script>
 
-    // Close Modal button
-    const modal = document.getElementById('modal');
-    document.getElementById('modal-close-btn').addEventListener('click', () => {
-      modal.style.display = 'none';
-      // Also stop video, clear iframe src if needed here
-      document.getElementById('modal-video').src = '';
-    });
+<div id="disclaimer-box" style="
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  max-width: 300px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  z-index: 9999;
+">
+  <p>
+    📢 ChillFlix is a non-profit project. We do not host any content on our servers. All content is publicly sourced.
+  </p>
+  <button onclick="document.getElementById('disclaimer-box').style.display='none'" style="
+    margin-top: 10px;
+    background: #e50914;
+    border: none;
+    padding: 6px 12px;
+    color: white;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+  ">
+    I Understand
+  </button>
+</div>
 
-    // Placeholder: Implement your search input handling and modal open logic here
-  </script>
 </body>
-</html>
