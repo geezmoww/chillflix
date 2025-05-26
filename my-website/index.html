@@ -17,70 +17,7 @@
   <script type="text/javascript" data-cfasync="false">
     (function(){var c=window,s="abd44046de39acd4542a19ad47275633",l=[["siteId",562-752+759-952+5203666],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],p=["d3d3LmFudGlhZGJsb2Nrc3lzdGVtcy5jb20vbHlici9zL2ZhdHJhbWVudC5taW4uanM=","ZDNjb2Q4MHRobjdxbmQuY2xvdWRmcm9udC5uZXQvY3RldGhlci5taW4uanM="],j=-1,h,z,k=function(){clearTimeout(z);j++;if(p[j]&&!(1774198828000<(new Date).getTime()&&1<j)){h=c.document.createElement("script");h.type="text/javascript";h.async=!0;var n=c.document.getElementsByTagName("script")[0];h.src="https://"+atob(p[j]);h.crossOrigin="anonymous";h.onerror=k;h.onload=function(){clearTimeout(z);c[s.slice(0,16)+s.slice(0,16)]||k()};z=setTimeout(k,5E3);n.parentNode.insertBefore(h,n)}};if(!c[s]){try{Object.freeze(c[s]=l)}catch(e){}k()}})();
   </script>
-<style>
-  /* === ChillFlix Chatroom === */
-  #chat-container {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 280px;
-    font-family: 'Segoe UI', sans-serif;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    border-radius: 12px;
-    overflow: hidden;
-    z-index: 9999;
-  }
-
-  #chat-header {
-    background: linear-gradient(135deg, #0055ff, #e60000);
-    color: white;
-    padding: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
-  }
-
-  #chat-body {
-    display: none;
-    background: #fff;
-    border: 1px solid #e60000;
-    max-height: 300px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  #chat-messages {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-    font-size: 14px;
-    color: #333;
-  }
-
-  #chat-input {
-    border: none;
-    border-top: 1px solid #ccc;
-    padding: 10px;
-    font-size: 14px;
-    width: 100%;
-    outline: none;
-  }
-</style>
-
 </head>
-<div id="chat-container">
-  <div id="chat-header" onclick="toggleChat()">💬 Chat with Viewers</div>
-  <div id="chat-body">
-    <div id="chat-messages" role="log" aria-live="polite"></div>
-    <input
-      type="text"
-      id="chat-input"
-      placeholder="Type your message and hit Enter..."
-      onkeydown="handleChatInput(event)"
-      aria-label="Chat input"
-    />
-  </div>
-</div>
 
 <body>
   <!-- Navbar -->
@@ -236,58 +173,6 @@
     });
   </script>
 
-<!-- Chatroom Widget -->
-<div id="chat-container">
-  <div id="chat-header" onclick="toggleChat()">
-    💬 ChillFlix Chatroom
-  </div>
-  <div id="chat-body">
-    <div id="chat-messages"></div>
-    <input type="text" id="chat-input" placeholder="Type your message..." onkeydown="sendMessage(event)" />
-  </div>
-</div>
-<!-- Firebase App (the core Firebase SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-
-<script>
-  // Replace with your Firebase project config
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_BUCKET",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    databaseURL: "YOUR_DB_URL"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-
-  function sendMessage(event) {
-    if (event.key === "Enter") {
-      const input = document.getElementById('chat-input');
-      const message = input.value.trim();
-      if (message !== "") {
-        db.ref('chat').push({ text: message, time: Date.now() });
-        input.value = "";
-      }
-    }
-  }
-
-  function toggleChat() {
-    const body = document.getElementById("chat-body");
-    body.style.display = body.style.display === "none" ? "flex" : "none";
-  }
-
-  db.ref('chat').on('child_added', snapshot => {
-    const msg = snapshot.val();
-    const msgDiv = document.createElement("div");
-    msgDiv.textContent = msg.text;
-    document.getElementById("chat-messages").appendChild(msgDiv);
-  });
-</script>
 
 </body>
 </html>
