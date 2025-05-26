@@ -397,7 +397,6 @@ body {
   cursor: grab;
 }
 
-/* Modal fade in/out */
 .modal.fade-in {
   animation: fadeIn 0.3s forwards;
 }
@@ -413,7 +412,6 @@ body {
   to {opacity: 0;}
 }
 
-/* Search modal styling */
 .search-modal {
   position: fixed;
   top: 10%;
@@ -449,7 +447,6 @@ body {
   outline: none;
 }
 
-/* Hamburger */
 .hamburger {
   display: none;
   cursor: pointer;
@@ -482,18 +479,15 @@ body {
   display: block;
 }
 
-/* Lazy loading placeholder */
 img.lazy-img {
   filter: blur(5px);
   transition: filter 0.3s;
 }
 
-/* When loaded */
 img:not(.lazy-img) {
   filter: none;
 }
 
-/* Rating stars */
 #modal-rating {
   font-size: 1.5rem;
   color: gold;
