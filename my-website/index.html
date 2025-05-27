@@ -77,23 +77,6 @@
   }
 </script>
 
-<button onclick="toggleChatroom()" style="padding: 10px 20px; background-color: #e50914; color: white; border: none; border-radius: 5px; cursor: pointer;">
-  💬 Toggle ChillFlix Chatroom
-</button>
-
-<div id="chatroom-container" style="display: none; margin-top: 20px;">
-  <iframe 
-    src="https://chillflix-axzx.onrender.com/chat.html"
-    style="width: 100%; height: 500px; border: none; border-radius: 10px;">
-  </iframe>
-</div>
-
-<script>
-  function toggleChatroom() {
-    const chat = document.getElementById('chatroom-container');
-    chat.style.display = (chat.style.display === 'none') ? 'block' : 'none';
-  }
-</script>
   <!-- Navbar -->
   <header class="navbar" role="banner">
     <a href="index.html" class="logo" aria-label="ChillFlix Home">
