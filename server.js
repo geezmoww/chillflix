@@ -49,6 +49,11 @@ io.on('connection', (socket) => {
       hour12: true
     });
 
+socket.on('online count', (count) => {
+  const countText = `${count} user${count === 1 ? '' : 's'} online`;
+  document.getElementById('online-count').textContent = countText;
+});
+
     io.emit('chat message', { username, msg, color, timestamp });
   });
 
