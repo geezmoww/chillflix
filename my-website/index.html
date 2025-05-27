@@ -20,6 +20,63 @@
 </head>
 
 <body>
+<style>
+  .chat-toggle-btn {
+    padding: 12px 24px;
+    background: #e50914;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(229, 9, 20, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .chat-toggle-btn:hover {
+    background: #f6121d;
+    transform: scale(1.05);
+  }
+
+  #chatroom-container {
+    display: none;
+    margin-top: 30px;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+
+  #chatroom-container iframe {
+    width: 100%;
+    max-width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+<button onclick="toggleChatroom()" class="chat-toggle-btn">
+  💬 Open ChillFlix Chatroom
+</button>
+
+<div id="chatroom-container">
+  <iframe 
+    src="https://chillflix-axzx.onrender.com/chat.html">
+  </iframe>
+</div>
+
+<script>
+  function toggleChatroom() {
+    const chat = document.getElementById('chatroom-container');
+    chat.style.display = (chat.style.display === 'none' || chat.style.display === '') ? 'block' : 'none';
+  }
+</script>
+
 <button onclick="toggleChatroom()" style="padding: 10px 20px; background-color: #e50914; color: white; border: none; border-radius: 5px; cursor: pointer;">
   💬 Toggle ChillFlix Chatroom
 </button>
