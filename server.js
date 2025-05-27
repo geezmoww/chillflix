@@ -35,7 +35,13 @@ io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     const username = users.get(socket.id) || 'Anonymous';
     const color = getColor(username);
-    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const timestamp = new Date().toLocaleTimeString('en-PH', {
+  timeZone: 'Asia/Manila',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: true
+});
+
     io.emit('chat message', { username, msg, color, timestamp });
   });
 
