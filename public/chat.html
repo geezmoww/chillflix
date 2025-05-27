@@ -6,37 +6,58 @@
   <style>
     body { font-family: sans-serif; background: #111; color: white; }
     #chat { max-width: 600px; margin: 50px auto; }
-    ul { list-style: none; padding: 0; max-height: 400px; overflow-y: auto; }
-    li { margin: 10px 0; padding: 10px; border-radius: 8px; }
-    .message { background: #222; }
-    .username { font-weight: bold; }
-    .timestamp { font-size: 0.8em; color: #888; margin-left: 10px; }
-    #typing { font-style: italic; color: #aaa; margin-bottom: 10px; }
-    input {
-      width: 80%;
+    ul { list-style: none; padding: 0; }
+    li { margin: 10px 0; background: #222; padding: 10px; border-radius: 8px; }
+    input, button {
       padding: 10px;
-      border: none;
       border-radius: 5px;
+      border: none;
+      font-size: 1em;
+    }
+    input {
       background: #333;
       color: white;
+      width: 80%;
+      margin-right: 10px;
     }
     button {
-      padding: 10px;
       background-color: #e50914;
       color: white;
-      border: none;
-      border-radius: 5px;
       cursor: pointer;
     }
     button:hover {
       background-color: #f6121d;
     }
+    #username-container {
+      max-width: 600px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    .username-label {
+      margin-bottom: 10px;
+      display: block;
+      font-size: 1.2em;
+    }
+    .timestamp {
+      font-size: 0.75em;
+      color: #aaa;
+      margin-left: 8px;
+    }
+    .username {
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <div id="chat">
+
+  <div id="username-container">
+    <label class="username-label" for="username-input">Enter your username to join ChillFlix Chatroom</label>
+    <input id="username-input" autocomplete="off" placeholder="Your name" />
+    <button id="join-btn">Join Chat</button>
+  </div>
+
+  <div id="chat" style="display:none;">
     <h2>💬 ChillFlix Chatroom</h2>
-    <div id="typing"></div>
     <ul id="messages"></ul>
     <input id="m" autocomplete="off" placeholder="Type your message..." />
     <button id="send">Send</button>
@@ -46,17 +67,54 @@
   <script>
     const socket = io();
 
-    // Prompt for username on page load
-    let username = '';
-    while (!username) {
-      username = prompt('Enter your username:').trim();
-    }
-    socket.emit('set username', username);
+    const usernameContainer = document.getElementById('username-container');
+    const usernameInput = document.getElementById('username-input');
+    const joinBtn = document.getElementById('join-btn');
 
-    const input = document.getElementById('m');
-    const btn = document.getElementById('send');
+    const chat = document.getElementById('chat');
     const messages = document.getElementById('messages');
-    const typingDiv = document.getElementById('typing');
+    const input = document.getElementById('m');
+    const sendBtn = document.getElementById('send');
+
+    let username = null;
+
+    joinBtn.addEventListener('click', () => {
+      const name = usernameInput.value.trim();
+      if (name) {
+        username = name;
+        socket.emit('set username', username);
+        usernameContainer.style.display = 'none';
+        chat.style.display = 'block';
+        input.focus();
+      }
+    });
+
+    function sendMessage() {
+      const message = input.value.trim();
+      if (message !== '') {
+        socket.emit('chat message', message);
+        input.value = '';
+      }
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    input.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+      // Notify typing
+      socket.emit('typing', input.value.length > 0);
+    });
+
+    socket.on('chat message', (data) => {
+      addMessage(data);
+    });
+
+    socket.on('typing', ({ username: typingUser, isTyping }) => {
+      showTypingIndicator(typingUser, isTyping);
+    });
 
     function addMessage({ username, msg, color, timestamp }) {
       const item = document.createElement('li');
@@ -67,66 +125,28 @@
       messages.scrollTop = messages.scrollHeight;
     }
 
-    function addNotification(text) {
-      const item = document.createElement('li');
-      item.style.textAlign = 'center';
-      item.style.color = '#888';
-      item.textContent = text;
-      messages.appendChild(item);
-      messages.scrollTop = messages.scrollHeight;
-    }
+    // Typing indicator
+    let typingTimeout;
+    const typingDiv = document.createElement('div');
+    typingDiv.style.color = '#ccc';
+    typingDiv.style.fontStyle = 'italic';
+    typingDiv.style.marginTop = '10px';
+    chat.appendChild(typingDiv);
 
-    function sendMessage() {
-      const message = input.value.trim();
-      if (message !== '') {
-        socket.emit('chat message', message);
-        input.value = '';
-        socket.emit('typing', false);
-      }
-    }
-
-    btn.addEventListener('click', sendMessage);
-
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault();
-        sendMessage();
-      }
-      // Notify typing status
-      socket.emit('typing', input.value.length > 0);
-    });
-
-    // Listen for chat messages
-    socket.on('chat message', (data) => {
-      addMessage(data);
-    });
-
-    // User joined / left notifications
-    socket.on('user joined', (user) => {
-      addNotification(`${user} joined the chat`);
-    });
-
-    socket.on('user left', (user) => {
-      addNotification(`${user} left the chat`);
-    });
-
-    // Typing indicator logic
-    let typingUsers = new Set();
-
-    socket.on('typing', ({ username: user, isTyping }) => {
+    function showTypingIndicator(user, isTyping) {
+      if (!user || user === username) return; // don't show your own typing
       if (isTyping) {
-        typingUsers.add(user);
-      } else {
-        typingUsers.delete(user);
-      }
-
-      if (typingUsers.size > 0) {
-        typingDiv.textContent = `${Array.from(typingUsers).join(', ')} is typing...`;
+        typingDiv.textContent = `${user} is typing...`;
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(() => {
+          typingDiv.textContent = '';
+        }, 3000);
       } else {
         typingDiv.textContent = '';
       }
-    });
+    }
   </script>
+
 </body>
 </html>
 
