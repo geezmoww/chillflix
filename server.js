@@ -26,6 +26,13 @@ function getColor(username) {
 io.on('connection', (socket) => {
   console.log('A user connected');
 
+  // Function to emit current online count
+  function updateOnlineCount() {
+    io.emit('online count', io.engine.clientsCount);
+  }
+
+  updateOnlineCount(); // send immediately when a user connects
+
   // Receive username from client
   socket.on('set username', (username) => {
     users.set(socket.id, username);
@@ -36,11 +43,11 @@ io.on('connection', (socket) => {
     const username = users.get(socket.id) || 'Anonymous';
     const color = getColor(username);
     const timestamp = new Date().toLocaleTimeString('en-PH', {
-  timeZone: 'Asia/Manila',
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: true
-});
+      timeZone: 'Asia/Manila',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
 
     io.emit('chat message', { username, msg, color, timestamp });
   });
@@ -54,6 +61,7 @@ io.on('connection', (socket) => {
     const username = users.get(socket.id);
     users.delete(socket.id);
     socket.broadcast.emit('user left', username);
+    updateOnlineCount(); // update count on disconnect
     console.log('A user disconnected');
   });
 });
