@@ -6,8 +6,12 @@
   <style>
     body { font-family: sans-serif; background: #111; color: white; }
     #chat { max-width: 600px; margin: 50px auto; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 10px 0; background: #222; padding: 10px; border-radius: 8px; }
+    ul { list-style: none; padding: 0; max-height: 400px; overflow-y: auto; }
+    li { margin: 10px 0; padding: 10px; border-radius: 8px; }
+    .message { background: #222; }
+    .username { font-weight: bold; }
+    .timestamp { font-size: 0.8em; color: #888; margin-left: 10px; }
+    #typing { font-style: italic; color: #aaa; margin-bottom: 10px; }
     input {
       width: 80%;
       padding: 10px;
@@ -32,6 +36,7 @@
 <body>
   <div id="chat">
     <h2>💬 ChillFlix Chatroom</h2>
+    <div id="typing"></div>
     <ul id="messages"></ul>
     <input id="m" autocomplete="off" placeholder="Type your message..." />
     <button id="send">Send</button>
@@ -40,35 +45,89 @@
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
-    const btn = document.getElementById('send');
+
+    // Prompt for username on page load
+    let username = '';
+    while (!username) {
+      username = prompt('Enter your username:').trim();
+    }
+    socket.emit('set username', username);
+
     const input = document.getElementById('m');
+    const btn = document.getElementById('send');
     const messages = document.getElementById('messages');
+    const typingDiv = document.getElementById('typing');
+
+    function addMessage({ username, msg, color, timestamp }) {
+      const item = document.createElement('li');
+      item.classList.add('message');
+      item.innerHTML = `<span class="username" style="color:${color}">${username}</span> 
+                        <span class="timestamp">${timestamp}</span><br>${msg}`;
+      messages.appendChild(item);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function addNotification(text) {
+      const item = document.createElement('li');
+      item.style.textAlign = 'center';
+      item.style.color = '#888';
+      item.textContent = text;
+      messages.appendChild(item);
+      messages.scrollTop = messages.scrollHeight;
+    }
 
     function sendMessage() {
       const message = input.value.trim();
       if (message !== '') {
         socket.emit('chat message', message);
         input.value = '';
+        socket.emit('typing', false);
       }
     }
 
     btn.addEventListener('click', sendMessage);
 
-    input.addEventListener('keydown', function (event) {
-      // Press Enter without Shift to send
+    input.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
         sendMessage();
       }
+      // Notify typing status
+      socket.emit('typing', input.value.length > 0);
     });
 
-    socket.on('chat message', (msg) => {
-      const item = document.createElement('li');
-      item.textContent = msg;
-      messages.appendChild(item);
-      messages.scrollTop = messages.scrollHeight; // auto scroll to bottom
+    // Listen for chat messages
+    socket.on('chat message', (data) => {
+      addMessage(data);
+    });
+
+    // User joined / left notifications
+    socket.on('user joined', (user) => {
+      addNotification(`${user} joined the chat`);
+    });
+
+    socket.on('user left', (user) => {
+      addNotification(`${user} left the chat`);
+    });
+
+    // Typing indicator logic
+    let typingUsers = new Set();
+
+    socket.on('typing', ({ username: user, isTyping }) => {
+      if (isTyping) {
+        typingUsers.add(user);
+      } else {
+        typingUsers.delete(user);
+      }
+
+      if (typingUsers.size > 0) {
+        typingDiv.textContent = `${Array.from(typingUsers).join(', ')} is typing...`;
+      } else {
+        typingDiv.textContent = '';
+      }
     });
   </script>
 </body>
 </html>
+
 
