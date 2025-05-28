@@ -345,24 +345,11 @@
 }
 
 body {
-  background-image: url('images/background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: white;
   font-family: Arial, sans-serif;
-  position: relative;
-  z-index: 0;
+  background: url('../backround.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  z-index: -1;
-}
 
 
