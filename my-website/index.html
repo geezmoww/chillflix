@@ -79,7 +79,7 @@
     </nav>
   </header>
 
-<!-- Banner with Movie Slideshow -->
+<!-- Responsive Banner with Movie Slideshow -->
 <section class="banner" id="banner" role="region" aria-live="polite" aria-label="Featured movies slideshow">
   <div class="slideshow-container">
     <img id="movie-poster" src="" alt="Movie Poster" />
@@ -132,10 +132,43 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .banner {
+      height: auto; /* allow height to expand */
+      padding: 15px 10px;
+    }
+
+    #movie-poster {
+      max-height: 200px;
+      border-radius: 6px;
+    }
+
+    #banner-title {
+      font-size: 1.5rem;
+      margin-top: 12px;
+    }
+
+    #banner-description {
+      font-size: 1rem;
+      max-width: 100%;
+      margin-top: 6px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #banner-title {
+      font-size: 1.3rem;
+    }
+
+    #banner-description {
+      font-size: 0.9rem;
+    }
+  }
 </style>
 
 <script>
-  // Replace this array with your actual movies data
   const movies = [
     {
       title: "Inception",
@@ -173,12 +206,12 @@
     showMovie(currentIndex);
   }
 
-  // Show first movie immediately after page load
   window.addEventListener('DOMContentLoaded', () => {
     showMovie(currentIndex);
     setInterval(nextMovie, 5000);
   });
 </script>
+
 
 
   <!-- Trending Rows -->
