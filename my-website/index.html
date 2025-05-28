@@ -227,6 +227,7 @@
   }
 
   #chatroom-toggle {
+    position: relative;
     background: #e50914;
     color: white;
     border: none;
@@ -236,6 +237,19 @@
     cursor: pointer;
     margin-bottom: 8px;
     font-size: 14px;
+  }
+
+  .chat-notification {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: yellow;
+    color: #111;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 999px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   }
 
   #chatroom-iframe {
@@ -256,16 +270,38 @@
 </style>
 
 <div id="chatroom-widget">
-  <button id="chatroom-toggle" onclick="toggleChatWidget()">💬 Chat</button>
+  <button id="chatroom-toggle" onclick="toggleChatWidget()">
+    💬 Chat
+    <span id="chatNotification" class="chat-notification" style="display: none;">1</span>
+  </button>
   <iframe id="chatroom-iframe" src="https://chillflix-axzx.onrender.com/chat.html"></iframe>
 </div>
 
 <script>
+  const iframe = document.getElementById('chatroom-iframe');
+  const notification = document.getElementById('chatNotification');
+  let unreadMessages = 1;
+
   function toggleChatWidget() {
-    const iframe = document.getElementById('chatroom-iframe');
-    iframe.style.display = iframe.style.display === 'none' || iframe.style.display === '' ? 'block' : 'none';
+    if (iframe.style.display === 'none' || iframe.style.display === '') {
+      iframe.style.display = 'block';
+      unreadMessages = 0;
+      notification.style.display = 'none';
+    } else {
+      iframe.style.display = 'none';
+    }
   }
+
+  // Simulate incoming messages
+  setInterval(() => {
+    if (iframe.style.display === 'none') {
+      unreadMessages++;
+      notification.textContent = unreadMessages;
+      notification.style.display = 'inline-block';
+    }
+  }, 15000); // every 15 seconds
 </script>
+
 
 </body>
 </html>
