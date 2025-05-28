@@ -351,5 +351,53 @@ body {
   color: #fff;
 }
 
+/* Header Styling */
+.header {
+  background-color: #121212;
+  padding: 20px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 20px;
+}
+
+.search-input {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background-color: #333;
+  color: white;
+  width: 200px;
+  transition: width 0.3s ease;
+}
+
+.search-input:focus {
+  width: 250px;
+  background-color: #444;
+}
 
 
