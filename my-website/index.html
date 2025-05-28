@@ -79,8 +79,8 @@
     </nav>
   </header>
 
-  <!-- Banner with Movie Slideshow -->
-<section class="banner" id="banner" role="region" aria-live="polite">
+<!-- Banner with Movie Slideshow -->
+<section class="banner" id="banner" role="region" aria-live="polite" aria-label="Featured movies slideshow">
   <div class="slideshow-container">
     <img id="movie-poster" src="" alt="Movie Poster" />
     <h1 id="banner-title"></h1>
@@ -88,8 +88,54 @@
   </div>
 </section>
 
+<style>
+  .banner {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    height: 400px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .slideshow-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  #movie-poster {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+  }
+
+  #banner-title {
+    margin-top: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  #banner-description {
+    margin-top: 8px;
+    font-size: 1.1rem;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
 <script>
-  // Replace this array with your real movies data from your API or database
+  // Replace this array with your actual movies data
   const movies = [
     {
       title: "Inception",
@@ -112,10 +158,14 @@
 
   function showMovie(index) {
     const movie = movies[index];
-    document.getElementById('movie-poster').src = movie.poster;
-    document.getElementById('movie-poster').alt = movie.title + " Poster";
-    document.getElementById('banner-title').textContent = movie.title;
-    document.getElementById('banner-description').textContent = movie.description;
+    const posterEl = document.getElementById('movie-poster');
+    const titleEl = document.getElementById('banner-title');
+    const descEl = document.getElementById('banner-description');
+
+    posterEl.src = movie.poster;
+    posterEl.alt = movie.title + " Poster";
+    titleEl.textContent = movie.title;
+    descEl.textContent = movie.description;
   }
 
   function nextMovie() {
@@ -123,46 +173,12 @@
     showMovie(currentIndex);
   }
 
-  // Initial movie display
-  showMovie(currentIndex);
-
-  // Change movie every 5 seconds
-  setInterval(nextMovie, 5000);
+  // Show first movie immediately after page load
+  window.addEventListener('DOMContentLoaded', () => {
+    showMovie(currentIndex);
+    setInterval(nextMovie, 5000);
+  });
 </script>
-
-<style>
-  .banner {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    text-align: center;
-    color: white;
-    background-color: #000;
-  }
-
-  .slideshow-container {
-    position: relative;
-    max-width: 800px;
-    margin: auto;
-  }
-
-  #movie-poster {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
-  #banner-title {
-    margin-top: 10px;
-    font-size: 2rem;
-  }
-
-  #banner-description {
-    font-size: 1.2rem;
-  }
-</style>
 
 
   <!-- Trending Rows -->
