@@ -14,13 +14,22 @@
       padding: 5px; border-radius: 5px; border: none;
     }
 
-   .banner {
-  height: 90vh; /* Increased from 70vh */
+  .banner {
+  height: 90vh; /* Tall banner for desktop */
   background-size: cover;
   display: flex;
   align-items: center;
   padding: 40px;
 }
+
+/* For mobile devices (max-width 768px), make banner a bit shorter */
+@media (max-width: 768px) {
+  .banner {
+    height: 60vh;  /* shorter height on mobile */
+    padding: 20px; /* less padding on smaller screens */
+  }
+}
+
 
     .banner h1 {
       background: rgba(0,0,0,0.7);
