@@ -15,11 +15,11 @@
     }
 
     .banner {
-      height: 50vh;
+      height: 70vh;
       background-size: cover;
       display: flex;
       align-items: center;
-      padding: 20px;
+      padding: 40px;
     }
 
     .banner h1 {
