@@ -79,10 +79,91 @@
     </nav>
   </header>
 
-  <!-- Banner -->
-  <section class="banner" id="banner" role="region" aria-live="polite">
+  <!-- Banner with Movie Slideshow -->
+<section class="banner" id="banner" role="region" aria-live="polite">
+  <div class="slideshow-container">
+    <img id="movie-poster" src="" alt="Movie Poster" />
     <h1 id="banner-title"></h1>
-  </section>
+    <p id="banner-description"></p>
+  </div>
+</section>
+
+<script>
+  // Replace this array with your real movies data from your API or database
+  const movies = [
+    {
+      title: "Inception",
+      description: "A thief who steals corporate secrets through dream-sharing technology.",
+      poster: "https://image.tmdb.org/t/p/original/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg"
+    },
+    {
+      title: "The Dark Knight",
+      description: "Batman faces the Joker in Gotham City.",
+      poster: "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+    },
+    {
+      title: "Interstellar",
+      description: "A team travels through a wormhole in space.",
+      poster: "https://image.tmdb.org/t/p/original/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
+    }
+  ];
+
+  let currentIndex = 0;
+
+  function showMovie(index) {
+    const movie = movies[index];
+    document.getElementById('movie-poster').src = movie.poster;
+    document.getElementById('movie-poster').alt = movie.title + " Poster";
+    document.getElementById('banner-title').textContent = movie.title;
+    document.getElementById('banner-description').textContent = movie.description;
+  }
+
+  function nextMovie() {
+    currentIndex = (currentIndex + 1) % movies.length;
+    showMovie(currentIndex);
+  }
+
+  // Initial movie display
+  showMovie(currentIndex);
+
+  // Change movie every 5 seconds
+  setInterval(nextMovie, 5000);
+</script>
+
+<style>
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    background-color: #000;
+  }
+
+  .slideshow-container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  #movie-poster {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  #banner-title {
+    margin-top: 10px;
+    font-size: 2rem;
+  }
+
+  #banner-description {
+    font-size: 1.2rem;
+  }
+</style>
+
 
   <!-- Trending Rows -->
   <main role="main">
