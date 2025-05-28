@@ -269,39 +269,116 @@
   }
 </style>
 
+<style>
+  #chatroom-widget {
+    position: fixed;
+    bottom: 85px;
+    right: 16px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  #chatroom-toggle {
+    position: relative;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .chat-notification {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: yellow;
+    color: #111;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 999px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  }
+
+  #chatroom-frame-wrapper {
+    position: relative;
+    display: none;
+  }
+
+  #chatroom-iframe {
+    width: 320px;
+    height: 450px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+
+  .chat-close-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    box-shadow: 0 0 6px rgba(0,0,0,0.4);
+  }
+
+  @media (max-width: 500px) {
+    #chatroom-iframe {
+      width: 90vw;
+      height: 60vh;
+    }
+  }
+</style>
 <div id="chatroom-widget">
   <button id="chatroom-toggle" onclick="toggleChatWidget()">
     💬 Chat
     <span id="chatNotification" class="chat-notification" style="display: none;">1</span>
   </button>
-  <iframe id="chatroom-iframe" src="https://chillflix-axzx.onrender.com/chat.html"></iframe>
+
+  <div id="chatroom-frame-wrapper">
+    <button class="chat-close-btn" onclick="toggleChatWidget()">×</button>
+    <iframe id="chatroom-iframe" src="https://chillflix-axzx.onrender.com/chat.html"></iframe>
+  </div>
 </div>
 
 <script>
-  const iframe = document.getElementById('chatroom-iframe');
+  const iframeWrapper = document.getElementById('chatroom-frame-wrapper');
   const notification = document.getElementById('chatNotification');
   let unreadMessages = 1;
 
   function toggleChatWidget() {
-    if (iframe.style.display === 'none' || iframe.style.display === '') {
-      iframe.style.display = 'block';
+    const isHidden = iframeWrapper.style.display === 'none' || iframeWrapper.style.display === '';
+    iframeWrapper.style.display = isHidden ? 'block' : 'none';
+
+    if (isHidden) {
       unreadMessages = 0;
       notification.style.display = 'none';
-    } else {
-      iframe.style.display = 'none';
     }
   }
 
   // Simulate incoming messages
   setInterval(() => {
-    if (iframe.style.display === 'none') {
+    if (iframeWrapper.style.display === 'none') {
       unreadMessages++;
       notification.textContent = unreadMessages;
       notification.style.display = 'inline-block';
     }
-  }, 15000); // every 15 seconds
+  }, 15000); // simulate every 15 seconds
 </script>
-
 
 </body>
 </html>
